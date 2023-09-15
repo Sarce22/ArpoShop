@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.arpo.models.Rol;
 import com.arpo.models.User;
-import com.arpo.models.Usuario;
 import com.arpo.service.RolService;
 import com.arpo.service.UserService;
 
@@ -41,16 +40,16 @@ public class UserController {
 	    }
 
 	    @PostMapping("/guardarUsuarios")
-	    public String guardarUsuario(@ModelAttribute Usuario usuario, Model model) {
-	    	boolean usuarioId = userService.existeUsuarioConid(usuario.getIdUsuario());
+	    public String guardarUsuario(@ModelAttribute User usuario, Model model) {
+	    	boolean usuarioId = userService.alReadyExist(usuario.getIdUser());
 	    	if(usuarioId) {
 	    		model.addAttribute("errorIdDuplicado", true);
 	    		return "redirect:/user/registro";
 	    	}
 	        int idRol = usuario.getIdRol().getId_Rol(); 
-	        Rol rolSeleccionado = rolService.obtenerRolPorId(idRol);
+	        Rol rolSeleccionado = rolService.getRolbyId(idRol);
 	        usuario.setIdRol(rolSeleccionado);
-	        userService.guardar(usuario);
+	        userService.save(usuario);
 	        System.out.print(usuario);
 	        return "redirect:/user/listado-usuarios";
 	    }
