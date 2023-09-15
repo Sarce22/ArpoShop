@@ -1,6 +1,7 @@
 package com.arpo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,19 +15,24 @@ public class UserService {
 	@Autowired
 	private IUserRepository userRepository;
 	
-	public List<User> listarUsuarios(){
+	public List<User> listUser(){
 		return userRepository.findAll();
 	}
 	
-	 public User obtenerPorId(Long id) {
+	public boolean alReadyExist(Long id) {
+        Optional<User> usuarioExistente = userRepository.findById(id);
+        return usuarioExistente.isPresent();
+    }
+	
+	 public User getById(Long id) {
 	        return userRepository.findById(id).orElse(null);
 	    }
 
-	    public User guardar(User user) {
+	    public User save(User user) {
 	        return userRepository.save(user);
 	    }
 
-	    public void eliminar(Long id) {
+	    public void delete(Long id) {
 	        userRepository.deleteById(id);
 	    }
 }
