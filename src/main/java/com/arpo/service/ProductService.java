@@ -13,19 +13,19 @@ public class ProductService {
 	@Autowired
 	private IProductRepository productRepository;
 	
-	public List<Product> listarProductos (){
+	public List<Product> listProduct (){
 		return productRepository.findAll();
 	}
 	
-	 public Product obtenerPorId(Long id) {
+	 public Product getByIdProduct(Long id) {
 	    return productRepository.findById(id).orElse(null);
 	 }
 
-	 public Product guardarProducto(Product producto) {
+	 public Product saveProduct(Product producto) {
         return productRepository.save(producto);
 	 }
 
-	 public void eliminarProducto(Long id) {
+	 public void deleteProduct(Long id) {
 	    productRepository.deleteById(id);
 	 }
 }

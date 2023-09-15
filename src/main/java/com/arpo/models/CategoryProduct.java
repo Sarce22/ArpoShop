@@ -17,15 +17,14 @@ public class CategoryProduct {
 	
 	private String nameCategory;
 	
-	@OneToMany(mappedBy = "idCategory")
-	private List<Product> listCart;
 	
 	
-	public CategoryProduct(Long idCategoryProduct, String nameCategory, List<Product> listCart) {
+	
+	public CategoryProduct(Long idCategoryProduct, String nameCategory) {
 		super();
 		this.idCategoryProduct = idCategoryProduct;
 		this.nameCategory = nameCategory;
-		this.listCart = listCart;
+
 	}
 
 	public Long getIdCategoryProduct() {
@@ -44,13 +43,6 @@ public class CategoryProduct {
 		this.nameCategory = nameCategory;
 	}
 
-	public List<Product> getListCart() {
-		return listCart;
-	}
-
-	public void setListCart(List<Product> listCart) {
-		this.listCart = listCart;
-	}
-		
+	
 
 }

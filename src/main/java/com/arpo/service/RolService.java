@@ -14,11 +14,11 @@ public class RolService {
 	@Autowired
 	private IRolRepository rolRepository;
 	
-	public List<Rol> obtenerRoles() {
+	public List<Rol> getRoleList() {
 	     return rolRepository.findAll(); 
 	}
 	
-	public Rol obtenerRolPorId(int id) {
+	public Rol getRolbyId(int id) {
 		return rolRepository.findById(id).orElse(null);
 	}
 }
