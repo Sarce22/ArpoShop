@@ -71,7 +71,6 @@ public class UserController {
 	    @PostMapping("/admin/updateUser/{idUser}")
 		public String updateUser(@PathVariable("idUser") Long id, User user, BindingResult result, Model model) {
 	    	if (result.hasErrors()) {
-	            // Si hay errores de validación, muestra la vista de actualización nuevamente con mensajes de error.
 	            return "usuario/update-user";
 	    	}
 
@@ -88,10 +87,8 @@ public class UserController {
 	        	alreadyExist.setPhoneNumber(user.getPhoneNumber());
 	        	alreadyExist.setPassword(user.getPassword());
 
-	            // Guarda los cambios en la base de datos
 	            userService.save(alreadyExist);
 	            
-	            // Redirige a la página de listado de usuarios con un mensaje de éxito
 	            model.addAttribute("successMessage", "El usuario ha sido modificado con éxito.");
 	            return "redirect:/user/listado-usuarios";
 	        }
