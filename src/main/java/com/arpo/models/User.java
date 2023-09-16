@@ -24,7 +24,7 @@ public class User {
 	
 	private String password;
 	
-	private String addres;
+	private String address;
 	
 	private String phoneNumber;
 	
@@ -33,7 +33,7 @@ public class User {
 	private Rol idRol;
 
 	public User(Long idUser, String name, String surname, int age, String email,
-			String password, String addres, String phoneNumber, Rol idRol) {
+			String password, String address, String phoneNumber, Rol idRol) {
 		super();
 		this.idUser = idUser;
 		this.name = name;
@@ -41,7 +41,7 @@ public class User {
 		this.age = age;
 		this.email = email;
 		this.password = password;
-		this.addres = addres;
+		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.idRol = idRol;
 	}
@@ -58,59 +58,59 @@ public class User {
 		this.idUser = idUser;
 	}
 
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 
-	public void setname(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getsurname() {
+	public String getSurname() {
 		return surname;
 	}
 
-	public void setsurname(String surname) {
+	public void setSurname(String surname) {
 		this.surname = surname;
 	}
 
-	public int getage() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setage(int age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
-	public String getemail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setemail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getpasswordSegura() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setpasswordSegura(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getaddres() {
-		return addres;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setaddres(String addres) {
-		this.addres = addres;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getphoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setphoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -121,7 +121,6 @@ public class User {
 	public void setIdRol(Rol idRol) {
 		this.idRol = idRol;
 	}
-	
-	
+
 
 }
