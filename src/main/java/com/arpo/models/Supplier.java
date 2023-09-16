@@ -9,10 +9,9 @@ import jakarta.persistence.Id;
 @Entity
 public class Supplier {
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idSupplier;
+	private Long idSupplier;
 	
 	private String nameSupplier;
 	
@@ -22,45 +21,50 @@ public class Supplier {
 	@Column(name = "addressSupplier")
 	private String address;
 
-	public Supplier(int idSupplier, String nameSupplier, String phoneNumber, String address) {
+	public Supplier(Long idSupplier, String nameSupplier, String phoneNumber, String address) {
 		super();
 		this.idSupplier = idSupplier;
 		this.nameSupplier = nameSupplier;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 	}
+	
+	public Supplier() {
+		super();
+	}
 
-	public int getIdSupplier() {
+	public Long getIdSupplier() {
 		return idSupplier;
 	}
 
-	public void setIdSupplier(int idSupplier) {
+	public void setIdSupplier(Long idSupplier) {
 		this.idSupplier = idSupplier;
 	}
 
-	public String getnameSupplier() {
+	public String getNameSupplier() {
 		return nameSupplier;
 	}
 
-	public void setnameSupplier(String nameSupplier) {
+	public void setNameSupplier(String nameSupplier) {
 		this.nameSupplier = nameSupplier;
 	}
 
-	public String getphoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setphoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getaddress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setaddress(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
-		
 
+	
+		
 }

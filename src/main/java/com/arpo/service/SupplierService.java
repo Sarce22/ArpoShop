@@ -28,8 +28,8 @@ public class SupplierService {
 	        return proveedorRepository.findById(id).orElse(null);
 	    }
 
-	    public Supplier save(Supplier proveedor) {
-	        return proveedorRepository.save(proveedor);
+	    public Supplier save(Supplier supplier) {
+	        return proveedorRepository.save(supplier);
 	    }
 
 	    public void delete(Long id) {
