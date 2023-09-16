@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.arpo.models.Rol;
 import com.arpo.models.User;
 import com.arpo.service.RolService;
@@ -98,10 +99,6 @@ public class UserController {
 		}
 	    
 	    
-<<<<<<< HEAD
-	    
-}
-=======
 	    @GetMapping("/admin/deleteUser/{idUser}")
 	    public String deleteEmpleado(@PathVariable("idUser") Long idUser, Model model) {
 	 	        User user = userService.getById(idUser);
@@ -112,4 +109,3 @@ public class UserController {
 
    
 }
->>>>>>> 0686c6515253f96261596d0a16044377b85527f4
