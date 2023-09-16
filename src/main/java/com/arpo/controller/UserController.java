@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.arpo.models.Rol;
 import com.arpo.models.User;
 import com.arpo.service.RolService;
@@ -30,28 +29,35 @@ public class UserController {
 	        List<Rol> roles = rolService.getRoleList();
 	        model.addAttribute("roles", roles);
 	        model.addAttribute("usuario", new User());
-	        return "add-user";
+	        return "usuario/add-user";
 	    }
 	    
 	    @GetMapping("/listado-usuarios")
 	    public String listaUsuarios(Model model) {
 	        model.addAttribute("ListaDeUsuarios", userService.listUser());
-	        return "listar-usuarios";
+	        return "usuario/listar-usuarios";
 	    }
 
 	    @PostMapping("/guardarUsuarios")
 	    public String guardarUsuario(@ModelAttribute User usuario, Model model) {
-	    	boolean usuarioId = userService.alReadyExist(usuario.getIdUser());
-	    	if(usuarioId) {
-	    		model.addAttribute("errorIdDuplicado", true);
-	    		return "redirect:/user/registro";
-	    	}
-	        int idRol = usuario.getIdRol().getId_Rol(); 
-	        Rol rolSeleccionado = rolService.getRolById(idRol);
-	        usuario.setIdRol(rolSeleccionado);
-	        userService.save(usuario);
-	        System.out.print(usuario);
-	        return "redirect:/user/listado-usuarios";
+	        boolean usuarioId = userService.alReadyExist(usuario.getIdUser());
+	        if(usuarioId) {
+	            model.addAttribute("errorIdDuplicado", true);
+	        } else {
+	            int idRol = usuario.getIdRol().getId_Rol();
+	            Rol rolSeleccionado = rolService.getRolById(idRol);
+	            usuario.setIdRol(rolSeleccionado);
+	            userService.save(usuario);
+	            return "redirect:/user/listado-usuarios";
+	        }
+	        // Si el usuario ya existe o hay otro error, muestra el formulario de registro nuevamente
+	        List<Rol> roles = rolService.getRoleList();
+	        model.addAttribute("roles", roles);
+	        model.addAttribute("usuario", usuario);
+	        return "usuario/add-user";
 	    }
+
+	    
+	    
 	    
 }
