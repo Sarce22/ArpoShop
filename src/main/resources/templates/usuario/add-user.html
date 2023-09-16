@@ -18,8 +18,9 @@
   			</div>
 		</nav>
 	</header>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Registro de Usuarios</h1>
+	<main><br>
+		<div class="container">
+        <h1 class="text-center">Registro de Usuarios</h1><hr><br>
         <form th:action="@{/user/guardarUsuarios}" th:object="${usuario}" method="post">
 			
 		 <div class="form-group col-6">
@@ -69,6 +70,8 @@
             </div><br>
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form><br>
+	</main>
+    
 	<footer class=" bg-light text-dark text-center py-3">
 	    <div class="container-fluid">
 	        <p>&copy; 2023 Arpo's Shop. Todos los derechos reservados.</p>
