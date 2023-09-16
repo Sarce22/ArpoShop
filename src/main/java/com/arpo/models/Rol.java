@@ -13,11 +13,8 @@ public class Rol {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_Rol;
 	
-	
 	private String name_rol;
-
 	
-
 	public Rol(int id_Rol, String name_rol) {
 		super();
 		this.id_Rol = id_Rol;

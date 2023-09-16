@@ -47,7 +47,7 @@ public class UserController {
 	    		return "redirect:/user/registro";
 	    	}
 	        int idRol = usuario.getIdRol().getId_Rol(); 
-	        Rol rolSeleccionado = rolService.getRolbyId(idRol);
+	        Rol rolSeleccionado = rolService.getRolById(idRol);
 	        usuario.setIdRol(rolSeleccionado);
 	        userService.save(usuario);
 	        System.out.print(usuario);
