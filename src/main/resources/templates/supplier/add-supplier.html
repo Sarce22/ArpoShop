@@ -19,17 +19,26 @@
 		</nav>
 	</header>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Registro de categorias </h1>
-        <form th:action="@{/category/saveCategory}" th:object="${categoryProduct}" method="post">
+        <h1 class="text-center mb-4">Registro de proveedores </h1>
+        <form th:action="@{/supplier/saveSupplier}" th:object="${supplier}" method="post">
 
 			<div class="form-group col-6">
-				<label for="nameCategory">Nombre Categoria</label>
-				<input type="text"  class="form-control" id="nameCategory" th:field="*{nameCategory}" placeholder="Ingrese elnombre del proveedor" required="required"> 
+				<label for="nameSupplier">Nombre proveedor</label>
+				<input type="text"  class="form-control" id="nameSupplier" th:field="*{nameSupplier}" placeholder="Ingrese elnombre del proveedor" required="required"> 
 			</div><br>
 			
+			<div class="form-group col-6">
+				<label for="phoneNumber">Numero de celular Proveedor</label>
+				<input type="number"  class="form-control" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Ingrese el numero celular" required="required"> 
+			</div><br>
 			
-			<button type="submit" class="btn btn-primary">Registrar Categoria</button>
-			<a th:href="@{/category/listCategory}" class="boton-registro">Ver categorias</a>
+			<div class="form-group col-6">
+				<label for="address">Direccion Proveedor</label>
+				<input type="text"  class="form-control" id="address" th:field="*{address}"  placeholder="Ingrese la direccion del proveedor" required="required"> 
+			</div><br>
+			
+			<button type="submit" class="btn btn-primary">Registrar Proveedor</button>
+			<a th:href="@{/supplier/listSupplier}" class="boton-registro">Ver proveedores</a>
 			
 		 
         </form><br>

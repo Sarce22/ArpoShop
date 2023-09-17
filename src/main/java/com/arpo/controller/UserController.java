@@ -48,7 +48,7 @@ public class UserController {
 	            model.addAttribute("errorIdDuplicado", true);
 	        } else {
 	            int idRol = usuario.getIdRol().getId_Rol();
-	            Rol rolSeleccionado = rolService.getRolbyId(idRol);
+	            Rol rolSeleccionado = rolService.getRolById(idRol);
 	            usuario.setIdRol(rolSeleccionado);
 	            userService.save(usuario);
 	            return "redirect:/user/listado-usuarios";

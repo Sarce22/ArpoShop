@@ -1,12 +1,12 @@
 package com.arpo.models;
 
-import java.util.List;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
 
 @Entity(name ="categoriaProducto")
 public class CategoryProduct {
@@ -17,14 +17,15 @@ public class CategoryProduct {
 	
 	private String nameCategory;
 	
-	
-	
-	
 	public CategoryProduct(Long idCategoryProduct, String nameCategory) {
 		super();
 		this.idCategoryProduct = idCategoryProduct;
 		this.nameCategory = nameCategory;
 
+	}
+	
+	public CategoryProduct() {
+		super();
 	}
 
 	public Long getIdCategoryProduct() {
@@ -42,6 +43,8 @@ public class CategoryProduct {
 	public void setNameCategory(String nameCategory) {
 		this.nameCategory = nameCategory;
 	}
+
+	
 
 	
 

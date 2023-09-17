@@ -18,7 +18,9 @@ public class RolService {
 	     return rolRepository.findAll(); 
 	}
 	
-	public Rol getRolbyId(int id) {
+	public Rol getRolById(int id) {
 		return rolRepository.findById(id).orElse(null);
 	}
+	
+	
 }
