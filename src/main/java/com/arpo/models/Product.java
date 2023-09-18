@@ -1,7 +1,5 @@
 package com.arpo.models;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,49 +14,52 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idProduct;
+	private Long idProduct;
 	
 	private String nameProduct;
 	@Column(name = "stockProducto")
 	private int stock;
+	
 	private String urlImagen;
 	
+	private double price;
+	
+	private String description;
 	@ManyToOne
 	@JoinColumn(name = "idcartProduct")
 	private Cart idcart;
 	
 	@ManyToOne
-	@JoinColumn(name = "idCategoryProduct")
+	@JoinColumn(name = "idCategory", referencedColumnName="idCategoryProduct")
 	private CategoryProduct idCategory;
 	
-	@OneToOne
-	@JoinColumn(name="idSupplierProduct")
+	@ManyToOne
+	@JoinColumn(name="idSupplier", referencedColumnName="idSupplier")
 	private Supplier idSupplier;
 	
 	@OneToOne
 	@JoinColumn(name = "idInventoryProduct")
 	private Inventory idInventary;
 
-	
-	
-	public Product(int idProduct, String nameProduct, int stock, String urlImagen, Cart idcart,
-			CategoryProduct idCategory, Supplier idSupplier, Inventory idInventary) {
+
+	public Product() {
 		super();
-		this.idProduct = idProduct;
-		this.nameProduct = nameProduct;
-		this.stock = stock;
-		this.urlImagen = urlImagen;
-		this.idcart = idcart;
-		this.idCategory = idCategory;
-		this.idSupplier = idSupplier;
-		this.idInventary = idInventary;
 	}
 
-	public int getIdProduct() {
+	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public Long getIdProduct() {
 		return idProduct;
 	}
 
-	public void setIdProduct(int idProduct) {
+	public void setIdProduct(Long idProduct) {
 		this.idProduct = idProduct;
 	}
 
@@ -70,11 +71,11 @@ public class Product {
 		this.nameProduct = nameProduct;
 	}
 
-	public int getstock() {
+	public int getStock() {
 		return stock;
 	}
 
-	public void setstock(int stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 
@@ -86,11 +87,19 @@ public class Product {
 		this.urlImagen = urlImagen;
 	}
 
-	public Cart getidcart() {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Cart getIdcart() {
 		return idcart;
 	}
 
-	public void setidcart(Cart idcart) {
+	public void setIdcart(Cart idcart) {
 		this.idcart = idcart;
 	}
 
@@ -117,5 +126,9 @@ public class Product {
 	public void setIdInventary(Inventory idInventary) {
 		this.idInventary = idInventary;
 	}
+	
+	
+
+	
 	
 }

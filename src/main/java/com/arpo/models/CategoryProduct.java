@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 
-@Entity(name ="categoriaProducto")
+@Entity(name ="categoryProduct")
 public class CategoryProduct {
 	
 	@Id
