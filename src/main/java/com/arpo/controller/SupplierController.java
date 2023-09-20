@@ -35,7 +35,7 @@ public class SupplierController {
 	 @PostMapping("/saveSupplier")
 	 public String saveSupplier(@ModelAttribute Supplier supplier, Model model) { 
 	         supplierService.save(supplier);
-	     return "redirect:/supplier/registroSupplier";
+	     return "redirect:/supplier/listSupplier";
 	 }
 	 
 	 @GetMapping("/admin/updateSupplier/{idSupplier}")

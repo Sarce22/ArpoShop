@@ -9,14 +9,7 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-light bg-light">
-  			<div class="container-fluid">
-    			<a class="navbar-brand" href="/user/listado-usuarios">
-     				<img src="https://png.pngtree.com/element_our/png_detail/20181229/vector-shop-icon-png_302739.jpg"
-     			 		alt="" width="30" height="24" class="d-inline-block align-text-top"> Arpo's Shop
-                </a>
-  			</div>
-		</nav>
+		<div th:replace="components/nav-admin :: nav"></div>
 	</header>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Registro de proveedores </h1>
@@ -38,14 +31,8 @@
 			</div><br>
 			
 			<button type="submit" class="btn btn-primary">Registrar Proveedor</button>
-			<a th:href="@{/supplier/listSupplier}" class="boton-registro">Ver proveedores</a>
-			
-		 
+		
         </form><br>
-	<footer class=" bg-light text-dark text-center py-3">
-	    <div class="container-fluid">
-	        <p>&copy; 2023 Arpo's Shop. Todos los derechos reservados.</p>
-	    </div>
-	</footer>
+	<div th:replace="components/footer :: footer" ></div>
 </body>
 </html>

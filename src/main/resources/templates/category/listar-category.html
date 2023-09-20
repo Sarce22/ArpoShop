@@ -8,16 +8,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-light bg-light">
-  			<div class="container-fluid">
-    			<a class="navbar-brand" href="/user/listado-usuarios">
-     				<img src="https://png.pngtree.com/element_our/png_detail/20181229/vector-shop-icon-png_302739.jpg"
-     			 		alt="" width="30" height="24" class="d-inline-block align-text-top"> Arpo's Shop
-                </a>
-  			</div>
-		</nav>
-	</header>
+<div th:replace="components/nav-admin :: nav"></div>
     <section><br>
 		<div class="container text-center">
         	<h1 class="text-center mb-4">Listado de categorias</h1><hr><br>
@@ -35,9 +26,9 @@
 	                    <td th:text="${category.idCategoryProduct}"></td>
 	                    <td th:text="${category.nameCategory}"></td>
 	                    <td><a th:href="@{/category/admin/updateCategory/{idCategoryProduct}(idCategoryProduct=${category.idCategoryProduct})}"
-       class="btn btn-primary">
-       <i class="fas fa-supplier-edit ml-2"></i></a></td>
-<td><a th:href="@{/category/admin/deleteCategory/{idCategoryProduct}(idCategoryProduct=${category.idCategoryProduct})}"
+      						 class="btn btn-primary">
+       						<i class="fas fa-supplier-edit ml-2"></i></a></td>
+						<td><a th:href="@{/category/admin/deleteCategory/{idCategoryProduct}(idCategoryProduct=${category.idCategoryProduct})}"
        class="btn btn-danger"><i class="fas fa-supplier-times ml-2"></i></a></td>
 
 	                    
@@ -48,10 +39,6 @@
     	</div>
 	</section><br>
 
-	<footer class=" bg-light text-dark text-center py-3">
-	    <div class="container-fluid">
-	        <p>&copy; 2023 Arpo's Shop. Todos los derechos reservados.</p>
-	    </div>
-	</footer>
+	<div th:replace="components/footer :: footer" ></div>
 	</body>
 </html>
