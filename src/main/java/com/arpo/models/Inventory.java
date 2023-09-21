@@ -18,17 +18,15 @@ public class Inventory {
 	
 	@OneToMany (mappedBy = "idInventary")
 	private List<Product> ListInventory;
+	private int stock;
 	
 	
-	public Inventory(int idInventory, List<Product> listInventory) {
+	
+	public Inventory(int idInventory, List<Product> listInventory, int stock) {
 		super();
 		this.idInventory = idInventory;
 		this.ListInventory = listInventory;
-		
-	}
-	
-	public Inventory() {
-		super();
+		this.stock = stock;
 	}
 	
 	public int getIdInventory() {
@@ -43,7 +41,12 @@ public class Inventory {
 	public void setListInventory(List<Product> listInventory) {
 		ListInventory = listInventory;
 	}
-	
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	
 
 }

@@ -15,7 +15,7 @@
 
 			<div class="form-group col-6">
 				<label for="nameSupplier">Nombre proveedor</label>
-				<input type="text"  class="form-control" id="nameSupplier" th:field="*{nameSupplier}" placeholder="Ingrese el nombre del proveedor" required="required"> 
+				<input type="text"  class="form-control" id="nameSupplier" th:field="*{nameSupplier}" placeholder="Ingrese elnombre del proveedor" required="required"> 
 			</div><br>
 			
 			<div class="form-group col-6">
@@ -29,7 +29,7 @@
 			</div><br>
 			
 			<button type="submit" class="btn btn-primary">Registrar Proveedor</button>
-			
+			<a th:href="@{/supplier/listSupplier}" class="boton-registro">Ver proveedores</a>
 			
 		 
         </form><br>
