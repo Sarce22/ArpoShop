@@ -16,7 +16,7 @@
 			
             <div class="form-group col-6">				
                 <label for="nameProduct">Nombre producto</label>
-                <input type="text" th:field="*{nameProduct}" class="form-control" id="nameProduct" required="required">      
+                <input type="text" th:field="*{nameProduct}" class="form-control" id="nameProduct" required="required" placeholder="Ingresa el nombre del producto">      
             </div>
             
             <div class="form-group col-6">
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group col-6">
                 <label for="description">Descripción</label>
-                <input type="text" th:field="*{description}" class="form-control" id="description" required="required">
+                <input type="text" th:field="*{description}" class="form-control" id="description" required="required" placeholder="Ingresa una descripcion">
             </div>
             <div class="form-group col-6">
                 <label for="price">Precio</label>
@@ -48,7 +48,7 @@
 	        </div>
             <div class="form-group col-6">
                 <label for="urlImagen">URL</label>
-                <input type="text" th:field="*{urlImagen}" class="form-control" id="urlImagen" required="required">
+                <input type="text" th:field="*{urlImagen}" class="form-control" id="urlImagen" required="required" placeholder="Ingresa una URL">
             </div><br>
           
             <button type="submit" class="btn btn-primary">Registrar</button>
