@@ -29,11 +29,19 @@ public class ProductService {
 	 public void deleteProduct(Long id) {
 	    productRepository.deleteById(id);
 	 }
-	 
+	
 	 public List<Product> getByCategory(Long idCategory){
 		 CategoryProduct category = new CategoryProduct();
 		 category.setIdCategoryProduct(idCategory);
 		 return productRepository.findByIdCategory(category);
 		 
 	 }
+
+	 public Iterable<Product> getActiveProducts() {
+	     return productRepository.loadActiveProducts();
+	 }
+	 
+	 public Iterable<Product> filterProductsByCategory(String name){
+		 return productRepository.filterProductsByCategory(name);
+	 
 }
