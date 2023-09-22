@@ -28,4 +28,13 @@ public class ProductService {
 	 public void deleteProduct(Long id) {
 	    productRepository.deleteById(id);
 	 }
+	 
+	 public Iterable<Product> getActiveProducts() {
+	     return productRepository.loadActiveProducts();
+	 }
+	 
+	 public Iterable<Product> filterProductsByCategory(String name){
+		 return productRepository.filterProductsByCategory(name);
+	 }
+
 }

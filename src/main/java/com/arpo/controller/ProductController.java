@@ -1,5 +1,6 @@
 package com.arpo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +108,36 @@ public class ProductController {
 	}
 	
 	
+	// -----------------------------------------------------------------------------------------
+	
+	@GetMapping("/productos-disponibles")
+	public String getActiveProduct(Model model) {
+	    ArrayList<Product> products = (ArrayList<Product>) productService.getActiveProducts();
+	    ArrayList<CategoryProduct> categories = (ArrayList<CategoryProduct>) categoryService.listCategory();
+	    if (products.isEmpty()) {
+	        model.addAttribute("noProductsMessage", "No hay productos disponibles en este momento.");
+	    } else {
+	        model.addAttribute("products", products);
+	    }
+	    model.addAttribute("categories", categories);
+	    return "/exploreProducts";
+	}
+
+
+
+	@GetMapping("/categoriaproductos/{nameCategory}")
+	public String filterProductsByCategory(@PathVariable("nameCategory") String nameCategory, Model model) {
+	    ArrayList<Product> filteredProducts = (ArrayList<Product>) productService.filterProductsByCategory(nameCategory);
+
+	    if (filteredProducts.isEmpty()) {
+	        model.addAttribute("noProductsMessage", "No hay productos disponibles en este momento.");
+	    } else {
+	        model.addAttribute("products", filteredProducts);
+	    }
+	    model.addAttribute("categories", categoryService.listCategory());
+
+	    return "/exploreProductsCategories";
+	}
 	
 	
 	
