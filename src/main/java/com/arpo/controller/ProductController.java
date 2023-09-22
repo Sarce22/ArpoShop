@@ -94,7 +94,7 @@ public class ProductController {
 			alreadyproducts.setDescription(product.getDescription());
 			alreadyproducts.setPrice(product.getPrice());
 			productService.saveProduct(alreadyproducts);
-			model.addAttribute("successMessage", "El proveedor ha sido modificado.");
+			model.addAttribute("successMessage", "El producto ha sido modificado.");
 		}
 		return "redirect:/product/listProducts";
 	}
@@ -106,9 +106,6 @@ public class ProductController {
 		model.addAttribute("product", productService.listProduct());
 		return "redirect:/product/listProducts";
 	}
-	
-	
-	// -----------------------------------------------------------------------------------------
 	
 	@GetMapping("/productos-disponibles")
 	public String getActiveProduct(Model model) {
@@ -123,8 +120,6 @@ public class ProductController {
 	    return "/exploreProducts";
 	}
 
-
-
 	@GetMapping("/categoriaproductos/{nameCategory}")
 	public String filterProductsByCategory(@PathVariable("nameCategory") String nameCategory, Model model) {
 	    ArrayList<Product> filteredProducts = (ArrayList<Product>) productService.filterProductsByCategory(nameCategory);
@@ -138,11 +133,5 @@ public class ProductController {
 
 	    return "/exploreProductsCategories";
 	}
-	
-	
-	
-	
-	
-	
 	
 }
