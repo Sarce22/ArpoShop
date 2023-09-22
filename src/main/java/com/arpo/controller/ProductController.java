@@ -93,7 +93,7 @@ public class ProductController {
 			alreadyproducts.setDescription(product.getDescription());
 			alreadyproducts.setPrice(product.getPrice());
 			productService.saveProduct(alreadyproducts);
-			model.addAttribute("successMessage", "El proveedor ha sido modificado.");
+			model.addAttribute("successMessage", "El producto ha sido modificado.");
 		}
 		return "redirect:/product/listProducts";
 	}
@@ -105,13 +105,6 @@ public class ProductController {
 		model.addAttribute("product", productService.listProduct());
 		return "redirect:/product/listProducts";
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }
