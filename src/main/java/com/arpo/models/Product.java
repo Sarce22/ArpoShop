@@ -116,17 +116,6 @@ public class Product {
 	public void setIdSupplier(Supplier idSupplier) {
 		this.idSupplier = idSupplier;
 	}
-<<<<<<< HEAD
 
-	public Inventory getIdInventary() {
-		return idInventary;
-	}
-
-	public void setIdInventary(Inventory idInventary) {
-		this.idInventary = idInventary;
-	}
-
-=======
->>>>>>> 1f60c1835200beab9888a61226dc2f5274f07c2b
 	
 }
