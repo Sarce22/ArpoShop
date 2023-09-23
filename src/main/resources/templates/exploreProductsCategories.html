@@ -12,7 +12,8 @@
         crossorigin="anonymous"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+	<!-- Icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -30,7 +31,7 @@
                         <a th:href="@{/product/productos-disponibles}" class="list-group-item list-group-item-action "
                             aria-current="true">Mostrar Todo</a>
 
-                        <a class="list-group-item list-group-item-action " aria-current="true" th:each="category : ${categories}"
+                        <a class="list-group-item list-group-item-action  " aria-current="true" th:each="category : ${categories}"
                             th:href="@{/product/categoriaproductos/{nameCategory}(nameCategory=${category.nameCategory})}" 
                             th:text="${category.nameCategory}"></a>
 
@@ -43,17 +44,19 @@
                     <div class=" container-fluid" >
                         <div class="row d-grid" style="grid-template-columns: repeat(3, 1fr);">
                             <div class="card h-100 col mx-2  " th:each="product : ${products}" 
-                            	style="max-width: 300px;">
+                            	style="max-width: 300px; margin-bottom: 10px ;">
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <a href="#"><img id="imcargar"
+                                    <a href=""><img id="imcargar"
                                             th:src="${product.urlImagen}"
                                             class="card-img-top m-1 " style='width: 100%'></a>
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4"
-                                        th:text="${product.nameProduct}"> <i
-                                            class="material-icons right">more_vert</i></span>
-                                    <p><a href="#">Comprar</a></p>
+                                        th:text="${product.nameProduct}"> 
+                                        <i class="material-icons right">more_vert</i></span>
+                                     <b><span th:text="${product.price}" style="color: crimson;"></span></b><br>
+                                     <span>Proveedor: <span th:text="${product.idSupplier.nameSupplier}"></span></span>
+                                    <p><a href="@{/product/detalleproducto/{idProduct}(idProduct=${product.idProduct})}">Ver más...</a></p>
                                 </div>
                                 <div class="card-reveal">
                                     <span class="card-title grey-text text-darken-4"

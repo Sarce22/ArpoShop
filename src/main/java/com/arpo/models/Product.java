@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Product {
@@ -26,8 +25,8 @@ public class Product {
 	
 	private String description;
 	@ManyToOne
-	@JoinColumn(name = "idcartProduct")
-	private Cart idcart;
+    @JoinColumn(name = "idcart") // Nombre de la columna que relaciona Product con Cart
+    private Cart cart;
 	
 	@ManyToOne
 	@JoinColumn(name = "idCategory", referencedColumnName="idCategoryProduct")
@@ -37,9 +36,6 @@ public class Product {
 	@JoinColumn(name="idSupplier", referencedColumnName="idSupplier")
 	private Supplier idSupplier;
 	
-	@OneToOne
-	@JoinColumn(name = "idInventoryProduct")
-	private Inventory idInventary;
 
 
 	public Product() {
@@ -95,13 +91,15 @@ public class Product {
 		this.description = description;
 	}
 
-	public Cart getIdcart() {
-		return idcart;
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setIdcart(Cart idcart) {
-		this.idcart = idcart;
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
+
 
 	public CategoryProduct getIdCategory() {
 		return idCategory;
@@ -118,6 +116,7 @@ public class Product {
 	public void setIdSupplier(Supplier idSupplier) {
 		this.idSupplier = idSupplier;
 	}
+<<<<<<< HEAD
 
 	public Inventory getIdInventary() {
 		return idInventary;
@@ -127,5 +126,7 @@ public class Product {
 		this.idInventary = idInventary;
 	}
 
+=======
+>>>>>>> 1f60c1835200beab9888a61226dc2f5274f07c2b
 	
 }

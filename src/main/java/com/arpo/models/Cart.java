@@ -18,8 +18,8 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idcart;
 	
-	@OneToMany(mappedBy = "idcart")
-	private List<Product> listProduct;
+	@OneToMany(mappedBy = "cart")
+    private List<Product> listProduct;
 	
 	@Column(name="totalCarrito")
 	private double total;

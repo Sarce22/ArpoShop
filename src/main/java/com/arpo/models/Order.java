@@ -25,7 +25,7 @@ public class Order {
 	private int stock;
 	
 	@ManyToOne
-	@JoinColumn (name = "UserOrder")
+	@JoinColumn (name = "UserOrder" )
 	private User user;
 
 	public Order(int idOrder, boolean status, Date dateOrder, int stock, User user) {

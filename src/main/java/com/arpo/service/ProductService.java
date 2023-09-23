@@ -19,7 +19,7 @@ public class ProductService {
 	}
 	
 	 public Product getByIdProduct(Long id) {
-	    return productRepository.findById(id).orElse(null);
+	    return productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
 	 }
 
 	 public Product saveProduct(Product producto) {
