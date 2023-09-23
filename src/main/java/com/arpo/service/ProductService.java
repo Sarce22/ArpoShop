@@ -43,5 +43,6 @@ public class ProductService {
 	 
 	 public Iterable<Product> filterProductsByCategory(String name){
 		 return productRepository.filterProductsByCategory(name);
+	 }
 	 
 }

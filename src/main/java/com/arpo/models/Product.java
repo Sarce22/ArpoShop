@@ -126,9 +126,6 @@ public class Product {
 	public void setIdInventary(Inventory idInventary) {
 		this.idInventary = idInventary;
 	}
-	
-	
 
-	
 	
 }
