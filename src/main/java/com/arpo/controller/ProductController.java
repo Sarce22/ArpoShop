@@ -140,6 +140,12 @@ public class ProductController {
 	}
 	
 	
+	@GetMapping("/detalleproducto/{idProduct}")
+   	public String viewDetail(@PathVariable("idProduct") Long idProduct, Model model) {
+   		Product product = productService.getByIdProduct(idProduct);
+   		model.addAttribute("product", product);
+   		return "product/productDetail";
+   	}
 	
 	
 	

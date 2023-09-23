@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Nombre del Producto]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		
+</head>
+<body>
+	 <div th:replace="components/nav-admin :: nav"></div><br>
+	 <section>
+		 <div class=" container my-4">
+			<div class="row">
+		        <div class="col-md-6">
+		                <img th:src="${product.urlImagen}" alt="" class="img-fluid">
+		            </div>
+		            <div class="col-md-6">
+						<form action="" method="post">
+							<input type="number" class="form-control" th:name="idProduct"
+								th:field="*{product.idProduct}" hidden="true">
+							<h1 th:text="${product.nameProduct}"></h1><hr>
+			                <p th:text="${product.description}"></p>
+			                <p class="text-primary" th:text="'$'+${product.price}"></p>
+			                <p class="text-success">Disponibilidad: <span th:text="${product.stock}"></span></p>
+			                <p>Categoría: <span th:text="${product.idCategory.nameCategory}"></span></p>
+			                <p>Proveedor: <span th:text="${product.idSupplier.nameSupplier}"></span></p>
+			                <label class="col-form-label">Cantidad</label>
+							<input type="number" class=" col-2" th:name="cantidad" placeholder="1" value="1"
+								required="required"><br>
+			                <div class="btn-group ">
+			                    <button class="btn btn-primary">Agregar al Carrito</button>
+			                </div>
+						</form>
+		                
+		         </div>
+		     </div> 
+		        
+		 </div>
+	 </section>
+	 
+	  <div th:replace="components/footer :: footer"></div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> 
