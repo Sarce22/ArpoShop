@@ -19,6 +19,8 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+	<link rel="stylesheet" type="text/css"
+	th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -60,7 +62,7 @@
                                         <i class="material-icons right">more_vert</i></span>
                                      <b><span th:text="${product.price}" style="color: crimson;"></span></b><br>
                                      <span>Proveedor: <span th:text="${product.idSupplier.nameSupplier}"></span></span>
-                                    <p><a href="@{/product/detalleproducto/{idProduct}(idProduct=${product.idProduct})}">Ver más..</a></p>
+                                    <p><a th:href="@{/product/detalleproducto/{idProduct}(idProduct=${product.idProduct})}">Ver más..</a></p>
                                 </div>
                                 <div class="card-reveal">
                                     <span class="card-title grey-text text-darken-4"
