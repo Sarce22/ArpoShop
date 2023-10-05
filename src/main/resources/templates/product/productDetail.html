@@ -17,7 +17,7 @@
 		                <img th:src="${product.urlImagen}" alt="" class="img-fluid">
 		            </div>
 		            <div class="col-md-6">
-						<form action="" method="post">
+						<form action="/cart/addToCart" method="post">
 							<input type="number" class="form-control" th:name="idProduct"
 								th:field="*{product.idProduct}" hidden="true">
 							<h1 th:text="${product.nameProduct}"></h1><hr>

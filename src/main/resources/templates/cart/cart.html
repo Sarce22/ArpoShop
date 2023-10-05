@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div th:replace="components/nav-admin :: nav"></div><br>
+    <div class="container mt-5">
+        <h1 class="mb-4">Carrito de Compras</h1>
+        <div class="row">
+            <div class="col-md-8">
+               
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="imagen-producto.jpg" class="card-img" alt="Nombre del Producto">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Nombre del Producto</h5>
+                                <p class="card-text">Descripción del producto</p>
+                                <p class="card-text">Precio: </p>
+                                <p class="card-text">Cantidad: </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             
+
+            </div>
+            <div class="col-md-4">
+              
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Resumen del Carrito</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Total: </li>
+                        </ul>
+                        <a href="/cart/checkout" class="btn btn-primary mt-3">Realizar Compra</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
