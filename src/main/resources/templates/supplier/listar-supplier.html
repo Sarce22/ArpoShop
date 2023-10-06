@@ -31,9 +31,12 @@
 	                    <td th:text="${supplier.address}"></td>
 	                    <td><a th:href="@{/supplier/admin/updateSupplier/{idSupplier}(idSupplier=${supplier.idSupplier})}"
 								class="btn btn-primary">
-								<i class="fas fa-supplier-edit ml-2"></i></a></td>
+								<img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1177/1177434.png" 
+									style='width: 30px'></img></a></td>
 						<td><a th:href="@{/supplier/admin/deleteSupplier/{idSupplier}(idSupplier=${supplier.idSupplier})}"
-								class="btn btn-danger"><i class="fas fa-supplier-times ml-2"></i></a></td>
+								class="btn btn-danger">
+								<img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/7347/7347206.png" 
+									style='width: 30px'></img></a></td>
 	                    
                 	</tr>
             	</tbody>

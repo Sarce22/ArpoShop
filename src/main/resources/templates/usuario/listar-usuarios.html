@@ -37,9 +37,15 @@
 	                    <td th:text="${user.phoneNumber}"></td>
 	                    <td th:text="${user.email}"></td>
 	                    <td><a th:href="@{/user/admin/editUser/{idUser}(idUser=${user.idUser})}"
-								class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+								class="btn btn-primary">
+								<img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1177/1177434.png" 
+									style='width: 30px'></img>
+							</a></td>
 						<td><a th:href="@{/user/admin/deleteUser/{idUser}(idUser=${user.idUser})}"
-								class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+								class="btn btn-danger">
+								<img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/7347/7347206.png" 
+									style='width: 30px'></img>
+							</a></td>
 	                    
                 	</tr>
             	</tbody>
