@@ -1,63 +1,56 @@
 package com.arpo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-
-import com.arpo.models.CategoryProduct;
 import com.arpo.models.Product;
-import com.arpo.models.Supplier;
-import com.arpo.service.CartService;
-import com.arpo.service.CategoryProductService;
-import com.arpo.service.SupplierService;
+import com.arpo.service.ProductService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
-	
-	@Autowired
-	private CartService cartService;
-	
-	@Autowired
-	private CategoryProductService categoryService;
-	
-	@Autowired
-	private SupplierService supplierService;
-	
-	
-	@GetMapping("/registroProductCart")
-	public String showformProducts(Model model) {
-		List<CategoryProduct> categories = categoryService.listCategory();
-		List<Supplier> suppliers = supplierService.listSuppliers();
-		model.addAttribute("category",categories);
-		model.addAttribute("supplier", suppliers);
-		model.addAttribute("product", new Product());
-		return "product/productos-disponibles";
-	}
-	
-	@GetMapping("/listProductCart")
-	public String listCartProduct(Model model) {
-	    List<Product> cartProducts = cartService.listCartProduct();
-	    
-	    
-	    double totalPrice = 0.0;
-	    for (Product product : cartProducts) {
-	        totalPrice += product.getPrice() * product.getStock();
-	    }
-
-	    model.addAttribute("ListProductsCart", cartProducts);
-	    model.addAttribute("totalPrice", totalPrice); 
-	    return "cart/view-cart";
-	}
 
 	
+    private List<Product> cart = new ArrayList<>(); 
+
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping("/showCart")
+    public String verCarrito(Model model) {
+        double total = calcularPrecioTotal();
+        model.addAttribute("products", cart);
+        model.addAttribute("total", total);
+        return "cart/view-cart"; 
+    }
+
+    @PostMapping("/agregar-producto/{productId}")
+    public String agregarProductoAlCarrito(@PathVariable Long productId, Model model) {
+        
+        Product product = productService.getByIdProduct(productId);
+        
+        if (product != null) {
+            cart.add(product); 
+        }
+        return "redirect:/cart/showCart";
+    }
+
+
+    private double calcularPrecioTotal() {
+        double total = 0.0;
+        for (Product product : cart) {
+            total += product.getPrice(); 
+        }
+        return total;
+    }
+}
+
+	/*
 	@PostMapping("/saveProductCart")
 	public String saveProduct(@ModelAttribute Product product, Model model) { 
 	    if (product != null && product.getIdCategory() != null && product.getIdSupplier() != null) {
@@ -76,6 +69,6 @@ public class CartController {
 	        cartService.saveProduct(product);
 	    }
 	    return "redirect:/cart/listProductCart";
-	}
-
-}
+	}*/
+	
+	
