@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +16,7 @@
 
 <body>
 	
-    <div th:replace="components/nav-admin :: nav"></div><br>
+    <div th:replace="components/nav-admin :: nav"></div>
     
     <section>
         <div class="container-fluid" th:switch="${products}+${categories}">
@@ -40,7 +39,7 @@
 				        <p th:text="${noProductsMessage}"></p>
 				    </div>
 				    <div class="row d-grid" 
-				    	style="grid-template-columns: repeat(3, 1fr); row-grap:15px;">
+				    	style="grid-template-columns: repeat(3, 1fr);">
 						<div class="card" style="width:20rem; "  th:each="product : ${products}">
 						  <img  class="card-img-top m-1 " th:src="${product.urlImagen}" style='width: 100%'>
 						  <div class="card-body">
