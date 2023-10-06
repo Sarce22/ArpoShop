@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +16,9 @@
 
 <body>
 	
+
     <div th:insert="components/nav-admin :: nav"></div><br>
+
     
     <section class="main-content">
         <div class="container-fluid" th:switch="${products}+${categories}">
@@ -39,6 +40,7 @@
 					<div th:if="${noProductsMessage}" class="alert alert-info p-2">
 				        <p th:text="${noProductsMessage}"></p>
 				    </div>
+
 				    <div class="row d-flex justify-content-space-evenly" 
 				    	style="grid-template-columns: repeat(3, 1fr); row-grap:15px;">
 						<div class="card mx-4" style="width:350px; "  th:each="product : ${products}">
@@ -46,6 +48,7 @@
 								<img  class="card-img-top m-1 " th:src="${product.urlImagen}" width="320px" height="auto">
 							</div>
 	  
+
 						  <div class="card-body">
 						    <h4 class="card-title" th:text="${product.nameProduct}"></h4>
 						    <span><b>Proveedor: </b><span th:text="${product.idSupplier.nameSupplier}"></span></span><br>
