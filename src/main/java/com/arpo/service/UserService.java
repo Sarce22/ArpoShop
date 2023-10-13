@@ -24,6 +24,19 @@ public class UserService {
         return usuarioExistente.isPresent();
     }
 	
+	public boolean isEmailDuplicated(String email) {
+	    List<User> users = userRepository.findAll(); 
+
+	    for (User user : users) {
+	        if (user.getEmail().equalsIgnoreCase(email)) {
+	            return true; 
+	        }
+	    }
+
+	    return false; 
+	}
+
+	
 	 public User getById(Long id) {
 		 return userRepository.findById(id)
 		            .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));

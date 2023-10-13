@@ -20,6 +20,7 @@ public class User {
 	
 	private int age;
 	
+	@Column(unique = true)
 	private String email;
 	
 	private String password;
