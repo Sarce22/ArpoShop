@@ -73,7 +73,6 @@ public class SupplierController {
 		 supplierService.delete(supplier.getIdSupplier());
 		 model.addAttribute("supplier",supplierService.listSuppliers());
 		 return "redirect:/supplier/listSupplier";
-		 
 	 }
 	 
 }
