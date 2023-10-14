@@ -2,22 +2,29 @@ package com.arpo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.arpo.config.CloudinaryConfig;
 import com.arpo.models.CategoryProduct;
 import com.arpo.models.Product;
 import com.arpo.models.Supplier;
 import com.arpo.service.CategoryProductService;
 import com.arpo.service.ProductService;
 import com.arpo.service.SupplierService;
+import com.cloudinary.utils.ObjectUtils;
+
 
 @Controller
 @RequestMapping("/product")
@@ -31,6 +38,9 @@ public class ProductController {
 	
 	@Autowired
 	private SupplierService supplierService;
+	
+	 @Autowired
+	 private CloudinaryConfig cloudc;
 	
 	
 	@GetMapping("/registroProduct")
@@ -52,18 +62,33 @@ public class ProductController {
 	
 	
 	@PostMapping("/saveProduct")
-	 public String saveProduct(@ModelAttribute Product product, Model model) { 
-		Long idCategory = product.getIdCategory().getIdCategoryProduct();
-		CategoryProduct category = categoryService.getById(idCategory);
-		product.setIdCategory(category);
-		
-		Long idSupplier = product.getIdSupplier().getIdSupplier();
-		Supplier supplier = supplierService.getById(idSupplier);
-		product.setIdSupplier(supplier);
-		
-	    productService.saveProduct(product);
-	     return "redirect:/product/registroProduct";
-	 }
+	public String saveProductAndImage(@ModelAttribute Product product, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
+	    System.out.println("SI ESTA ENTRANDO");
+	    
+	    try {
+	        Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+	        System.out.println(uploadResult.get("url").toString());
+	        
+	        product.setUrlImagen(uploadResult.get("url").toString());
+
+	        Long idCategory = product.getIdCategory().getIdCategoryProduct();
+	        CategoryProduct category = categoryService.getById(idCategory);
+	        product.setIdCategory(category);
+
+	        Long idSupplier = product.getIdSupplier().getIdSupplier();
+	        Supplier supplier = supplierService.getById(idSupplier);
+	        product.setIdSupplier(supplier);
+
+	        // Guarda el producto
+	        productService.saveProduct(product);
+	    } catch (Exception e) {
+	        System.out.println(e.getMessage());
+	    }
+
+	    return "redirect:/product/registroProduct";
+	}
+
+	
 	
 	
 	@GetMapping("/admin/editProduct/{idProduct}")
