@@ -63,7 +63,7 @@ public class ProductController {
 	
 	@PostMapping("/saveProduct")
 	public String saveProductAndImage(@ModelAttribute Product product, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
-	    System.out.println("SI ESTA ENTRANDO");
+	    
 	    
 	    try {
 	        Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
@@ -81,6 +81,7 @@ public class ProductController {
 
 	        // Guarda el producto
 	        productService.saveProduct(product);
+	        System.out.println("Si GUARDO EL PRODUCTO");
 	    } catch (Exception e) {
 	        System.out.println(e.getMessage());
 	    }
@@ -108,21 +109,34 @@ public class ProductController {
 	
 	
 	@PostMapping("/admin/updateProduct/{idProduct}")
-	public String updateProduct(@PathVariable("idProduct") Long idProduct,Product product,Model model) {
-		Product alreadyproducts = productService.getByIdProduct(idProduct);
-		if (alreadyproducts != null) {
-			alreadyproducts.setNameProduct(product.getNameProduct());
-			alreadyproducts.setStock(product.getStock());
-			alreadyproducts.setIdCategory(product.getIdCategory());
-			alreadyproducts.setIdSupplier(product.getIdSupplier());
-			alreadyproducts.setUrlImagen(product.getUrlImagen());
-			alreadyproducts.setDescription(product.getDescription());
-			alreadyproducts.setPrice(product.getPrice());
-			productService.saveProduct(alreadyproducts);
-			model.addAttribute("successMessage", "El producto ha sido modificado.");
-		}
-		return "redirect:/product/listProducts";
+	public String updateProduct(@PathVariable("idProduct") Long idProduct, Product product, Model model, @RequestParam("file") MultipartFile file) {
+	    Product alreadyproducts = productService.getByIdProduct(idProduct);
+
+	    if (alreadyproducts != null) {
+	        alreadyproducts.setNameProduct(product.getNameProduct());
+	        alreadyproducts.setStock(product.getStock());
+	        alreadyproducts.setIdCategory(product.getIdCategory());
+	        alreadyproducts.setIdSupplier(product.getIdSupplier());
+	        alreadyproducts.setDescription(product.getDescription());
+	        alreadyproducts.setPrice(product.getPrice());
+
+	        try {
+	            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+	            System.out.println(uploadResult.get("url").toString());
+	            
+	            alreadyproducts.setUrlImagen(uploadResult.get("url").toString());
+	        } catch (Exception e) {
+	            System.out.println(e.getMessage());
+	        }
+
+	        productService.saveProduct(alreadyproducts);
+	        System.out.println("SI LO ACTUALIZO");
+	        model.addAttribute("successMessage", "El producto ha sido modificado.");
+	    }
+	    
+	    return "redirect:/product/listProducts";
 	}
+
 	
 	@GetMapping("/admin/deleteProduct/{idProduct}")
 	public String deleteProduct(@PathVariable("idProduct") Long idProduct, Model model) {
