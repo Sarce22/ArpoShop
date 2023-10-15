@@ -9,26 +9,29 @@
     
 </head>
 <body>
-    <div th:replace="components/nav-admin :: nav"></div><br>
+    <div th:replace="components/nav-user :: nav"></div><br>
     <div class="container mt-5">
         <h1 class="mb-4">Carrito de Compras</h1>
         <div class="row">
             <div class="col-md-8">
-                <!-- Utiliza Thymeleaf para iterar sobre los productos en el carrito -->
-                <div th:each="product : ${products}" class="card mb-3">
+             <div th:if="${error}" class="alert alert-danger">
+				<p th:text="${error}"></p>
+			  </div>
+                <div th:each="cart : ${cart?.listProduct}" class="card mb-3">
+					
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img class="card-img" th:src="${product.urlImagen}" alt="Nombre del Producto">
+                            <img class="card-img" th:src="${cart.urlImagen}" alt="Nombre del Producto">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${product.nameProduct}"></h5>
-                                <p class="card-text" th:text="${product.description}"></p>
+                                <h5 class="card-title" th:text="${cart.nameProduct}"></h5>
+                                <p class="card-text" th:text="${cart.description}"></p>
                                 <p class="card-text">
-                                    Precio: $<span th:text="${product.price}"></span>
+                                    Precio: $<span th:text="${cart.price}"></span>
                                 </p>
                                 <p class="card-text">
-                                    Cantidad en stock: <span th:text="${product.stock}"></span>
+                                    Cantidad en stock: <span th:text="${cart.stock}"></span>
                                 </p>
                             </div>
                         </div>
@@ -40,7 +43,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Resumen del Carrito</h5>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Total: $<span th:text="${total}"></span></li>
+                            <li class="list-group-item">Total: $<span th:text="${cart?.total}"></span></li>
                         </ul>
                         <a href="/cart/checkout" class="btn btn-primary mt-3">Realizar Compra</a>
                     </div>
