@@ -21,7 +21,7 @@
 		                <img th:src="${product.urlImagen}" alt="" class="img-fluid">
 		            </div>
 		            <div class="col-md-6">
-						<form th:action="@{/cart/agregar-producto/{productId}(productId=${product.idProduct})}"  method="post">
+						<form>
 							<input type="number" class="form-control" th:name="idProduct"
 								th:field="*{product.idProduct}" hidden="true">
 							<h1 th:text="${product.nameProduct}"></h1><hr>
@@ -31,11 +31,9 @@
 			                <p>Categoría: <span th:text="${product.idCategory.nameCategory}"></span></p>
 			                <p>Proveedor: <span th:text="${product.idSupplier.nameSupplier}"></span></p>
 			                <label class="col-form-label">Cantidad</label>
-							<input type="number" class=" col-2" th:name="cantidad" placeholder="1" value="1"
-								required="required"><br>
-			                <div class="btn-group ">
-			                    <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
-			                </div>
+							<input type="number" class=" col-2" th:name="cantidad" value="1"
+								min="1"  required="required"><br><br>
+								
 						</form>
 		                
 		         </div>
