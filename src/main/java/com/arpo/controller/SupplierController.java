@@ -1,6 +1,7 @@
 package com.arpo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,12 +68,29 @@ public class SupplierController {
 		 return null;
 	 }
 	 
-	 @GetMapping("/admin/deleteSupplier/{idSupplier}")
+	/* @GetMapping("/admin/deleteSupplier/{idSupplier}")
 	 public String deleteSupplier(@PathVariable("idSupplier") Long idSupplier,Model model) {
 		 Supplier supplier = supplierService.getById(idSupplier);
 		 supplierService.delete(supplier.getIdSupplier());
 		 model.addAttribute("supplier",supplierService.listSuppliers());
 		 return "redirect:/supplier/listSupplier";
 	 }
+	 */
 	 
+	 @GetMapping("/admin/deleteSupplier/{idSupplier}")
+	 public String deleteSupplier(@PathVariable("idSupplier") Long idSupplier, Model model) {
+	     try {
+	         Supplier supplier = supplierService.getById(idSupplier);
+	         supplierService.delete(supplier.getIdSupplier());
+	     } catch (DataIntegrityViolationException e) {
+	         model.addAttribute("errorIdDuplicado", true);
+	         System.out.println("No se pude eliminar el proveedor");
+	         // Puedes agregar otros atributos de modelo o realizar otras acciones aquí si es necesario.
+	     }
+
+	     // Actualizar la lista de proveedores después de la eliminación
+	     model.addAttribute("supplier", supplierService.listSuppliers());
+
+	     return "redirect:/supplier/listSupplier"; // Ejemplo de redirección a la página de lista de proveedores.
+	 }
 }
