@@ -81,7 +81,7 @@ public class ProductController {
 
 	        // Guarda el producto
 	        productService.saveProduct(product);
-	        System.out.println("Si GUARDO EL PRODUCTO");
+	        System.out.println("Si GUARDO EL PRODUCTO Y LA IMAGEN");
 	    } catch (Exception e) {
 	        System.out.println(e.getMessage());
 	    }
