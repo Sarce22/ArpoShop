@@ -15,11 +15,8 @@
 </head>
 
 <body>
-	
-
     <div th:replace="~{components/nav-admin :: nav}"></div><br>
 
-    
     <section class="main-content">
         <div class="container-fluid" th:switch="${products}+${categories}">
             <div class="row d-flex justify-content-around">
@@ -45,7 +42,9 @@
 				    	style="grid-template-columns: repeat(3, 1fr); row-grap:15px;">
 						<div class="card mx-4" style="width:350px; "  th:each="product : ${products}">
 							<div class="card-img" style="width:330;">
-								<img  class="card-img-top m-1 " th:src="${product.urlImagen}" width="320px" height="auto">
+								<a th:href="@{/product/detalleproducto/{idProduct}(idProduct=${product.idProduct})}">
+									<img  class="card-img-top m-1 " th:src="${product.urlImagen}" width="320px" height="auto">
+								</a>
 							</div>
 	  
 
