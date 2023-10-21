@@ -33,7 +33,7 @@
       
             <div class="form-group col-6">
                 <label for="age">Edad</label>
-                <input type="number" th:field="*{age}" class="form-control" id="age" required="required" >
+                <input type="number" th:field="*{age}" class="form-control" id="age" required="required" min="1" max="100" placeholder="Ingrese su edad">
             </div>
             <div class="form-group col-6">
                 <label for="address">Dirección</label>
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group col-6">
                 <label for="phoneNumber">Teléfono</label>
-                <input type="text" th:field="*{phoneNumber}" class="form-control" id="phoneNumber" required="required" placeholder="Ingrese su telefono">
+                <input type="text" th:field="*{phoneNumber}" class="form-control" id="phoneNumber" required="required" placeholder="Ingrese su telefono" minlength="10" maxlength="12">
             </div>
             <div class="form-group col-6">
 	                <label for="idRol">Rol</label>

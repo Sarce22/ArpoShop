@@ -30,16 +30,17 @@
       
             <div class="form-group col-6">
                 <label for="stock">Cantidad</label>
-                <input type="number" th:field="*{stock}" class="form-control" id="stock" required="required">
+                <input type="number" th:field="*{stock}" class="form-control" id="stock" required="required" min="1" max="100">
             </div>
             <div class="form-group col-6">
                 <label for="description">Descripción</label>
-                <input type="text" th:field="*{description}" class="form-control" id="description" required="required" min="0">
+                <input type="text" th:field="*{description}" class="form-control" id="description" required="required">
             </div>
-            <div class="form-group col-6">
-                <label for="price">Precio</label>
-                <input type="number" th:field="*{price}" class="form-control" id="price" required="required">
-            </div>
+        	<div class="form-group col-6">
+    			<label for="price">Precio</label>
+    			<input type="number" th:field="*{price}" class="form-control" id="price" required="required" min="1000" max="99999999">
+			</div>
+
             <div class="form-group col-6">
 	                <label for="idSupplier">Proveedor</label>
 	                <select name="idSupplier" class="form-control" id="idSupplier" required="required">
@@ -54,7 +55,7 @@
                     <label for="file-upload"  >
                         <i class="fas fa-cloud-upload-alt"></i> 
                     </label>
-                    <input type="file" id="file-upload" accept="image/jpeg" class="form-control-file"  name="file">
+                    <input type="file" id="file-upload" accept="image/jpeg" class="form-control"  name="file">
                 </div>
             </div><br>
           
