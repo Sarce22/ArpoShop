@@ -12,6 +12,8 @@
     <section><br>
 		<div class="container text-center">
         	<h1 class="text-center mb-4">Listado de Proveedores</h1><hr>
+        	
+				
         	<table class="table table-striped table-bordered">
             	<thead class="thead-dark">
                 	<tr>
@@ -42,6 +44,9 @@
             	</tbody>
         	</table>
       	</div>
+      	<div class="alert alert-danger" th:if="${errorIdDuplicado}" role="alert" data-dismiss="alert">
+    		<strong>El proveedor tiene productos relacionados</strong>
+		</div>
 	</section><br><br><br><br><br><br>
 
 	<div th:replace="components/footer :: footer"></div>

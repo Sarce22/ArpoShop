@@ -62,10 +62,10 @@ public class SupplierController {
 			 
 			 model.addAttribute("successMessage", "El proveedor ha sido modificado.");
 			 return "redirect:/supplier/listSupplier";
-			 
 		 }
 		 return null;
 	 }
+	 
 	 
 	 @GetMapping("/admin/deleteSupplier/{idSupplier}")
 	 public String deleteSupplier(@PathVariable("idSupplier") Long idSupplier,Model model) {
@@ -73,16 +73,6 @@ public class SupplierController {
 		 supplierService.delete(supplier.getIdSupplier());
 		 model.addAttribute("supplier",supplierService.listSuppliers());
 		 return "redirect:/supplier/listSupplier";
-		 
 	 }
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 
 }

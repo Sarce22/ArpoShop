@@ -2,18 +2,23 @@ package com.arpo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+
+import com.arpo.config.CloudinaryConfig;
 import com.arpo.models.CategoryProduct;
 import com.arpo.models.Product;
 import com.arpo.models.Rol;
@@ -22,9 +27,9 @@ import com.arpo.models.User;
 import com.arpo.service.CategoryProductService;
 import com.arpo.service.ProductService;
 import com.arpo.service.SupplierService;
-import com.arpo.singleton.Singleton;
+import com.cloudinary.utils.ObjectUtils;
 
-import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/product")
@@ -38,6 +43,9 @@ public class ProductController {
 	
 	@Autowired
 	private SupplierService supplierService;
+	
+	 @Autowired
+	 private CloudinaryConfig cloudc;
 	
 	
 	@GetMapping("/registroProduct")
@@ -59,18 +67,34 @@ public class ProductController {
 	
 	
 	@PostMapping("/saveProduct")
-	 public String saveProduct(@ModelAttribute Product product, Model model) { 
-		Long idCategory = product.getIdCategory().getIdCategoryProduct();
-		CategoryProduct category = categoryService.getById(idCategory);
-		product.setIdCategory(category);
-		
-		Long idSupplier = product.getIdSupplier().getIdSupplier();
-		Supplier supplier = supplierService.getById(idSupplier);
-		product.setIdSupplier(supplier);
-		
-	    productService.saveProduct(product);
-	     return "redirect:/product/registroProduct";
-	 }
+	public String saveProductAndImage(@ModelAttribute Product product, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
+	    
+	    
+	    try {
+	        Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+	        System.out.println(uploadResult.get("url").toString());
+	        
+	        product.setUrlImagen(uploadResult.get("url").toString());
+
+	        Long idCategory = product.getIdCategory().getIdCategoryProduct();
+	        CategoryProduct category = categoryService.getById(idCategory);
+	        product.setIdCategory(category);
+
+	        Long idSupplier = product.getIdSupplier().getIdSupplier();
+	        Supplier supplier = supplierService.getById(idSupplier);
+	        product.setIdSupplier(supplier);
+
+	        // Guarda el producto
+	        productService.saveProduct(product);
+	        System.out.println("Si GUARDO EL PRODUCTO Y LA IMAGEN");
+	    } catch (Exception e) {
+	        System.out.println(e.getMessage());
+	    }
+
+	    return "redirect:/product/registroProduct";
+	}
+
+	
 	
 	
 	@GetMapping("/admin/editProduct/{idProduct}")
@@ -90,21 +114,34 @@ public class ProductController {
 	
 	
 	@PostMapping("/admin/updateProduct/{idProduct}")
-	public String updateProduct(@PathVariable("idProduct") Long idProduct,Product product,Model model) {
-		Product alreadyproducts = productService.getByIdProduct(idProduct);
-		if (alreadyproducts != null) {
-			alreadyproducts.setNameProduct(product.getNameProduct());
-			alreadyproducts.setStock(product.getStock());
-			alreadyproducts.setIdCategory(product.getIdCategory());
-			alreadyproducts.setIdSupplier(product.getIdSupplier());
-			alreadyproducts.setUrlImagen(product.getUrlImagen());
-			alreadyproducts.setDescription(product.getDescription());
-			alreadyproducts.setPrice(product.getPrice());
-			productService.saveProduct(alreadyproducts);
-			model.addAttribute("successMessage", "El producto ha sido modificado.");
-		}
-		return "redirect:/product/listProducts";
+	public String updateProduct(@PathVariable("idProduct") Long idProduct, Product product, Model model, @RequestParam("file") MultipartFile file) {
+	    Product alreadyproducts = productService.getByIdProduct(idProduct);
+
+	    if (alreadyproducts != null) {
+	        alreadyproducts.setNameProduct(product.getNameProduct());
+	        alreadyproducts.setStock(product.getStock());
+	        alreadyproducts.setIdCategory(product.getIdCategory());
+	        alreadyproducts.setIdSupplier(product.getIdSupplier());
+	        alreadyproducts.setDescription(product.getDescription());
+	        alreadyproducts.setPrice(product.getPrice());
+
+	        try {
+	            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+	            System.out.println(uploadResult.get("url").toString());
+	            
+	            alreadyproducts.setUrlImagen(uploadResult.get("url").toString());
+	        } catch (Exception e) {
+	            System.out.println(e.getMessage());
+	        }
+
+	        productService.saveProduct(alreadyproducts);
+	        System.out.println("SI LO ACTUALIZO");
+	        model.addAttribute("successMessage", "El producto ha sido modificado.");
+	    }
+	    
+	    return "redirect:/product/listProducts";
 	}
+
 	
 	@GetMapping("/admin/deleteProduct/{idProduct}")
 	public String deleteProduct(@PathVariable("idProduct") Long idProduct, Model model) {

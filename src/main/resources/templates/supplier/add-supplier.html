@@ -20,7 +20,7 @@
 			
 			<div class="form-group col-6">
 				<label for="phoneNumber">Número de celular Proveedor</label>
-				<input type="number"  class="form-control" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Ingrese el numero celular" required="required"> 
+				<input type="text"  class="form-control" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Ingrese el numero celular" required="required" minlength="10" maxlength="12"> 
 			</div><br>
 			
 			<div class="form-group col-6">

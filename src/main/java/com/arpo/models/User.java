@@ -28,6 +28,7 @@ public class User implements Serializable{
 	
 	private int age;
 	
+	@Column(unique = true)
 	private String email;
 	
 	private String password;
