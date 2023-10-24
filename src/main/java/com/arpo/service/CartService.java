@@ -44,7 +44,6 @@ public class CartService {
                 user.get().setCart(cart);;
             }
             cart.addProduct(product, cant);
-            singleton.EscribirCarrito(cart);
         }
     }
 
