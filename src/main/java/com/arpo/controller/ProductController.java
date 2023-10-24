@@ -2,7 +2,6 @@ package com.arpo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,19 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.arpo.models.CategoryProduct;
 import com.arpo.models.Product;
-import com.arpo.models.Rol;
 import com.arpo.models.Supplier;
-import com.arpo.models.User;
 import com.arpo.service.CategoryProductService;
 import com.arpo.service.ProductService;
 import com.arpo.service.SupplierService;
-import com.arpo.singleton.Singleton;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/product")

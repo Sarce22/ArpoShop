@@ -16,7 +16,6 @@ import com.arpo.models.Rol;
 import com.arpo.models.User;
 import com.arpo.service.CategoryProductService;
 import com.arpo.service.ProductService;
-import com.arpo.service.SupplierService;
 import com.arpo.singleton.Singleton;
 
 import jakarta.servlet.http.HttpSession;
@@ -42,6 +41,12 @@ public class ArpoShopController {
 	@GetMapping({"/signIn"})
 	public String signIn() {
 		return "signIn";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate();
+	    return "redirect:/";
 	}
 	
 

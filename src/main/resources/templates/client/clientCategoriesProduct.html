@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <div th:insert="components/nav-user :: nav"></div><br>
+    <div th:insert="~{components/nav-user :: nav}"></div><br>
     <section>
         <div class="container-fluid" th:switch="${products}+${categories}">
             <div class="row d-flex justify-content-around">
@@ -61,7 +61,7 @@
 
     </section><br><br><br><br><br><br>
 
-    <div th:replace="components/footer :: footer"></div>
+    <div th:replace="~{components/footer :: footer}"></div>
 </body>
 
 </html>

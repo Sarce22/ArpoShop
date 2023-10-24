@@ -12,7 +12,7 @@
 </head>
 <body>
 
-	 <div th:insert="components/nav-user :: nav"></div><br>
+	 <div th:insert="~{components/nav-user :: nav}"></div><br>
 	 <section>
 
 		 <div class=" container my-4">
@@ -50,6 +50,6 @@
 	 </section><br><br>
 
 	 
-	  <div th:replace="components/footer :: footer"></div>
+	  <div th:replace="~{components/footer :: footer}"></div>
 </body>
 </html> 

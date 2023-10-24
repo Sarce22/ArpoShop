@@ -19,7 +19,7 @@
 <body>
 	
 
-    <div th:insert="components/nav-user :: nav"></div><br>
+    <div th:insert="~{components/nav-user :: nav}"></div><br>
 
     <input type="hidden" id="userId" name="userId" th:value="${userId}">
     <section class="main-content">
@@ -71,7 +71,7 @@
                 </div>
             </div>      
     </section><br><br><br><br><br><br>
-    <div th:replace="components/footer :: footer"></div>
+    <div th:replace="~{components/footer :: footer}"></div>
 </body>
 
 </html>

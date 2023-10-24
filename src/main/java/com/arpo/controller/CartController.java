@@ -6,17 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.arpo.models.Cart;
-import com.arpo.models.Product;
-import com.arpo.models.User;
 import com.arpo.service.CartService;
-import com.arpo.service.ProductService;
-import com.arpo.singleton.Singleton;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/cart")
@@ -24,9 +17,6 @@ public class CartController {
 
 	 @Autowired
 	 private CartService cartService;  
-
-	 @Autowired
-	 private Singleton singleton;
 	 
 	 
 	 @GetMapping("/showCart")
