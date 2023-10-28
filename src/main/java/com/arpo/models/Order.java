@@ -1,7 +1,7 @@
 package com.arpo.models;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,20 +27,22 @@ public class Order implements Serializable{
 	
 	private Date dateOrder;
 	
-	@Column (name = "stockOrder")
-	private int stock;
-	
 	@ManyToOne
 	@JoinColumn (name = "UserOrder" )
 	private User user;
 
+	private double total;
+	
 	public Order(int idOrder, boolean status, Date dateOrder, int stock, User user) {
 		super();
 		this.idOrder = idOrder;
 		this.status = status;
 		this.dateOrder = dateOrder;
-		this.stock = stock;
 		this.user = user;
+	}
+
+	public Order() {
+		super();// TODO Auto-generated constructor stub
 	}
 
 	public int getIdOrder() {
@@ -67,14 +69,6 @@ public class Order implements Serializable{
 		this.dateOrder = dateOrder;
 	}
 
-	public int getstock() {
-		return stock;
-	}
-
-	public void setstock(int stock) {
-		this.stock = stock;
-	}
-
 	public User getUsuario() {
 		return user;
 	}
@@ -82,6 +76,14 @@ public class Order implements Serializable{
 	public void setUsuario(User user) {
 		this.user = user;
 	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
 	
-	//Hola 
+	
 }

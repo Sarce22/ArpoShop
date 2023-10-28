@@ -36,6 +36,9 @@ public class UserService {
 	    return false; 
 	}
 
+	public Optional<User> findById(Long id) {
+		return userRepository.findById(id);
+	}
 	
 	 public User getById(Long id) {
 		 return userRepository.findById(id)

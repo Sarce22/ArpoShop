@@ -31,9 +31,9 @@ public class Product implements Serializable{
 	private double price;
 	
 	private String description;
+	
 	@ManyToOne
-    @JoinColumn(name = "idcart") // Nombre de la columna que relaciona Product con Cart
-    private Cart cart;
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "idCategory", referencedColumnName="idCategoryProduct")
@@ -97,16 +97,6 @@ public class Product implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public Cart getCart() {
-		return cart;
-	}
-
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
 
 	public CategoryProduct getIdCategory() {
 		return idCategory;

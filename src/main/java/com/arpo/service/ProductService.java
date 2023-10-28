@@ -1,6 +1,7 @@
 package com.arpo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class ProductService {
 	 public Product getByIdProduct(Long id) {
 	    return productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
 	 }
+	 
+	 public Optional<Product> get(Long id) {
+			return productRepository.findById(id);
+		}
 
 	 public Product saveProduct(Product producto) {
         return productRepository.save(producto);

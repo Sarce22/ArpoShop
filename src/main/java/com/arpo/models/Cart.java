@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -25,81 +26,107 @@ public class Cart implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idcart;
 	
-	@OneToMany(mappedBy = "cart")
-    private List<Product> listProduct = new ArrayList<>();
-	
-	@Column(name="totalCarrito")
+	private String nombre;
+	private int cantidad;
+	private double precio;
 	private double total;
 	
-	@OneToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@ManyToOne
+	private Order order;
+	
+	@ManyToOne
+	private Product product;
 	
 	
 	public Cart() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Cart(Long idcart, String nombre, int cantidad, double precio, double total, Order order,
+			Product product) {
+		super();
+		this.idcart = idcart;
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+		this.precio = precio;
+		this.total = total;
+		this.order = order;
+		this.product = product;
+	}
+
+
+
 	public Long getIdcart() {
 		return idcart;
 	}
+
 
 	public void setIdcart(Long idcart) {
 		this.idcart = idcart;
 	}
 
-	public List<Product> getListProduct() {
-        return listProduct;
-    }
 
-	public void setListProduct(List<Product> listProduct) {
-		this.listProduct = listProduct;
+	public String getNombre() {
+		return nombre;
 	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+
+	public double getPrecio() {
+		return precio;
+	}
+
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
 
 	public double getTotal() {
 		return total;
 	}
 
+
 	public void setTotal(double total) {
 		this.total = total;
 	}
 
-	public User getUser() {
-		return user;
+
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
+
+
+	public Product getProduct() {
+		return product;
+	}
+
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	
-	 public void addProduct(Product product, int cant) {
-	        if (product != null && cant > 0) {
-	            
-	            Product existingProduct = listProduct.stream()
-	                    .filter(p -> p.getIdProduct().equals(product.getIdProduct()))
-	                    .findFirst()
-	                    .orElse(null);
-
-	            if (existingProduct != null) {
-	                int currentCant = existingProduct.getStock();
-	                if (currentCant + cant <= existingProduct.getStock()) {
-	                	
-	                    existingProduct.setStock(currentCant + cant);
-	                }
-	            } else {
-	                
-	                int maxCant = product.getStock();
-	                if (cant <= maxCant) {
-	                    product.setStock(cant);
-	                    listProduct.add(product);
-	                }
-	            }
-	            
-	            total = listProduct.stream()
-	                    .mapToDouble(p -> p.getPrice() * p.getStock())
-	                    .sum();
-	        }
-	    }
+	
 	
 
 }
