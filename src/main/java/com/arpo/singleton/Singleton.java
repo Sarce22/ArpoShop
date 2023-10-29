@@ -33,9 +33,9 @@ public class Singleton {
         listUser.add(admin);
         listUser.add(user2);
         
-        user.save(user2);
+       user.save(user2);
         user.save(user1);
-        user.save(admin);
+       user.save(admin);
         escribirObjetoListUser();
     }
 
