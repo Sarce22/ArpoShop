@@ -11,6 +11,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </head>
+
 <body>
 
     <div th:insert="components/nav-user :: nav"></div><br>
@@ -23,41 +24,45 @@
                     <div class="list-group">
                         <a th:href="@{/client/available-products}" class="list-group-item list-group-item-action "
                             aria-current="true">Mostrar Todo</a>
-                        <a class="list-group-item list-group-item-action  " aria-current="true" th:each="category : ${categories}"
-                            th:href="@{/client/categoryproduct/{nameCategory}(nameCategory=${category.nameCategory})}" 
+                        <a class="list-group-item list-group-item-action  " aria-current="true"
+                            th:each="category : ${categories}"
+                            th:href="@{/client/categoryproduct/{nameCategory}(nameCategory=${category.nameCategory})}"
                             th:text="${category.nameCategory}"></a>
                     </div>
                 </div>
                 <div class="col-10 overflow-auto">
-					
-					<input type="number" class="form-control" th:name= "idUser"
-								th:field="*{user.idUser}" hidden="true">
-								
-					<div th:if="${noProductsMessage}" class="alert alert-info p-2">
-				        <p th:text="${noProductsMessage}"></p>
-				    </div>
 
-				    <div class="row d-flex justify-content-space-evenly" 
-				    	style="grid-template-columns: repeat(3, 1fr); row-grap:15px;">
-						<div class="card mx-4" style="width:350px; "  th:each="product : ${products}">
-							<div class="card-img" style="width:330;">
-								<img  class="card-img-top m-1 " th:src="${product.urlImagen}" width="320px" height="auto">
-							</div>
+                    <input type="number" class="form-control" th:name="idUser" th:field="*{user.idUser}" hidden="true">
 
-						  <div class="card-body">
-						    <h4 class="card-title" th:text="${product.nameProduct}"></h4>
-						    <span><b>Proveedor: </b><span th:text="${product.idSupplier.nameSupplier}"></span></span><br>
-						    <b><span th:text="${product.price}" style="color: crimson;"></span></b> <br>
-				
-						    <a th:href="@{/client/detailproduct/{idProduct}(idProduct=${product.idProduct})}">
-								<img class="card-img-top mx-5 " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn6O3SGIX-byH--yDbt5Pi0q4MmqeeDT_xuWJws9S0SIIEGl0MgQxENYjeVgkS1ptfYw&usqp=CAU" style='width: 130px'>
-							</a>
-						</div>
-					</div>
-                    
+                    <div th:if="${noProductsMessage}" class="alert alert-info p-2">
+                        <p th:text="${noProductsMessage}"></p>
+                    </div>
+
+                    <div class="row d-flex justify-content-space-evenly"
+                        style="grid-template-columns: repeat(3, 1fr); row-grap:15px;">
+                        <div class="card mx-4" style="width:350px; " th:each="product : ${products}">
+                            <div class="card-img" style="width:330;">
+                                <img class="card-img-top m-1 " th:src="${product.urlImagen}" width="320px"
+                                    height="auto">
+                            </div>
+
+                            <div class="card-body">
+                                <h4 class="card-title" th:text="${product.nameProduct}"></h4>
+                                <span><b>Proveedor: </b><span
+                                        th:text="${product.idSupplier.nameSupplier}"></span></span><br>
+                                <b><span th:text="${product.price}" style="color: crimson;"></span></b> <br>
+
+                                <a th:href="@{/client/detailproduct/{idProduct}(idProduct=${product.idProduct})}">
+                                    <img class="card-img-top mx-5 "
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn6O3SGIX-byH--yDbt5Pi0q4MmqeeDT_xuWJws9S0SIIEGl0MgQxENYjeVgkS1ptfYw&usqp=CAU"
+                                        style='width: 130px'>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-
-            </div>
 
     </section><br><br><br><br><br><br>
 
