@@ -51,7 +51,7 @@
 						  <div class="card-body">
 						    <h4 class="card-title" th:text="${product.nameProduct}"></h4>
 						    <span><b>Proveedor: </b><span th:text="${product.idSupplier.nameSupplier}"></span></span><br>
-						    <b><span th:text="${product.price}" style="color: crimson;"></span></b> <br><br>
+						   <b><span class="formatted-price" th:text="${product.price}" style="color: crimson;"></span></b> <br><br>
 				
 						    <a th:href="@{/product/detalleproducto/{idProduct}(idProduct=${product.idProduct})}">
 								<img class="card-img-top mx-5 " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn6O3SGIX-byH--yDbt5Pi0q4MmqeeDT_xuWJws9S0SIIEGl0MgQxENYjeVgkS1ptfYw&usqp=CAU" style='width: 130px'>
@@ -64,5 +64,17 @@
     </section><br><br><br><br><br><br>
     <div th:replace="~{components/footer :: footer}"></div>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var precios = document.querySelectorAll('.formatted-price');
+        
+        precios.forEach(function (precio) {
+            var valor = parseFloat(precio.textContent);
+            precio.textContent = valor.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+        });
+    });
+</script>
+
 
 </html>
