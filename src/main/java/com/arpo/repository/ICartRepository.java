@@ -7,5 +7,5 @@ import com.arpo.models.Cart;
 
 
 public interface ICartRepository extends JpaRepository<Cart, Long>{
-
+	
 }

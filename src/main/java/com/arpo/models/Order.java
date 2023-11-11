@@ -1,7 +1,9 @@
 package com.arpo.models;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity (name = "orderUser")
 public class Order implements Serializable{
@@ -23,24 +26,22 @@ public class Order implements Serializable{
 	private int idOrder;
 	
 	@Column (name = "statusOrder")
-	private boolean status;
+	private String status;
 	
 	private Date dateOrder;
-	
-	@Column (name = "stockOrder")
-	private int stock;
 	
 	@ManyToOne
 	@JoinColumn (name = "UserOrder" )
 	private User user;
 
-	public Order(int idOrder, boolean status, Date dateOrder, int stock, User user) {
-		super();
-		this.idOrder = idOrder;
-		this.status = status;
-		this.dateOrder = dateOrder;
-		this.stock = stock;
-		this.user = user;
+	@OneToMany(mappedBy = "order")
+	private List<Cart> detalle;
+	
+	private double total;
+	
+	
+	public Order() {
+		super();// TODO Auto-generated constructor stub
 	}
 
 	public int getIdOrder() {
@@ -51,37 +52,47 @@ public class Order implements Serializable{
 		this.idOrder = idOrder;
 	}
 
-	public boolean isstatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setstatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public Date getdateOrder() {
+	public Date getDateOrder() {
 		return dateOrder;
 	}
 
-	public void setdateOrder(Date dateOrder) {
+	public void setDateOrder(Date dateOrder) {
 		this.dateOrder = dateOrder;
 	}
 
-	public int getstock() {
-		return stock;
-	}
-
-	public void setstock(int stock) {
-		this.stock = stock;
-	}
-
-	public User getUsuario() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUsuario(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public List<Cart> getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(List<Cart> detalle) {
+		this.detalle = detalle;
+	}
+
 	
-	//Hola 
+	
+	
 }

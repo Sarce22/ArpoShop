@@ -31,9 +31,9 @@ public class Product implements Serializable{
 	private double price;
 	
 	private String description;
+	
 	@ManyToOne
-    @JoinColumn(name = "idcart") // Nombre de la columna que relaciona Product con Cart
-    private Cart cart;
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "idCategory", referencedColumnName="idCategoryProduct")
@@ -47,6 +47,7 @@ public class Product implements Serializable{
 
 	public Product() {
 		super();
+		this.urlImagen= "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
 	}
 
 	
@@ -98,16 +99,6 @@ public class Product implements Serializable{
 		this.description = description;
 	}
 
-	public Cart getCart() {
-		return cart;
-	}
-
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
-
 	public CategoryProduct getIdCategory() {
 		return idCategory;
 	}
@@ -124,5 +115,4 @@ public class Product implements Serializable{
 		this.idSupplier = idSupplier;
 	}
 
-	
 }
