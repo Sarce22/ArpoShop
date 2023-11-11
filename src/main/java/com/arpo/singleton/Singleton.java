@@ -1,9 +1,11 @@
 package com.arpo.singleton;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.arpo.models.Rol;
 import com.arpo.models.User;
+import com.arpo.service.UserService;
 
 import jakarta.annotation.PostConstruct;
 
@@ -15,6 +17,9 @@ import java.util.Optional;
 public class Singleton {
 	
     private ArrayList<User> listUser;
+    
+    @Autowired
+    private UserService user;
 
     @PostConstruct
     private void init() {
@@ -26,6 +31,10 @@ public class Singleton {
         listUser.add(user1);
         listUser.add(admin);
         listUser.add(user2);
+        
+        user.save(user1);
+        user.save(user2);
+        user.save(admin);
         escribirObjetoListUser();
     }
 

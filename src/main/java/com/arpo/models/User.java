@@ -1,13 +1,14 @@
 package com.arpo.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name= "user")
 public class User implements Serializable{
@@ -40,12 +41,12 @@ public class User implements Serializable{
 	@ManyToOne
 	@JoinColumn (name = "idRol", referencedColumnName = "id_Rol")
 	private Rol idRol;
-	
-	@OneToOne(mappedBy = "user")
-	@JoinColumn(name = "idcart",referencedColumnName = "idcart")
-    private Cart cart;
 
+	@OneToMany(mappedBy = "user")
+	private List<Product> productos;
 	
+	@OneToMany(mappedBy = "user")
+	private List<Order> ordenes;
 	
 	public User(Long idUser, String name, String surname, int age, String email,
 			String password, String address, String phoneNumber, Rol idRol) {
@@ -136,15 +137,6 @@ public class User implements Serializable{
 	public void setIdRol(Rol idRol) {
 		this.idRol = idRol;
 	}
-
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
 	
 
 }

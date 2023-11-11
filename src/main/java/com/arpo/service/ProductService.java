@@ -1,6 +1,7 @@
 package com.arpo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,4 +46,7 @@ public class ProductService {
 		 return productRepository.filterProductsByCategory(name);
 	 }
 	 
+	 public Optional<Product> get(Long id) {
+		 return productRepository.findById(id);
+	 }
 }

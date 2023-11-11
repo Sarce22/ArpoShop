@@ -19,6 +19,10 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
+	public Optional<User> findById(Long id) {
+		return userRepository.findById(id);
+	}
+	
 	public boolean alReadyExist(Long id) {
         Optional<User> usuarioExistente = userRepository.findById(id);
         return usuarioExistente.isPresent();

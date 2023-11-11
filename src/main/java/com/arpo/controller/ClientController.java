@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.arpo.models.CategoryProduct;
+import com.arpo.models.Order;
 import com.arpo.models.Product;
 import com.arpo.models.User;
 import com.arpo.service.CategoryProductService;
+import com.arpo.service.OrderService;
 import com.arpo.service.ProductService;
+import com.arpo.service.UserService;
 import com.arpo.singleton.Singleton;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +31,9 @@ public class ClientController {
 	
 	@Autowired
 	private CategoryProductService categoryService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@Autowired
 	private Singleton singleton;
@@ -88,4 +94,14 @@ public class ClientController {
    		model.addAttribute("product", product);
    		return "client/clientDetailProduct";
    	}
+	
+	@GetMapping("/detalle/{id}")
+	public String detalleCompra(@PathVariable Integer id, HttpSession session, Model model) {
+		Optional<Order> orden=orderService.findById(id);
+		
+		model.addAttribute("detalles", orden.get().getDetalle());
+		//session
+		model.addAttribute("sesion", session.getAttribute("userId"));
+		return "usuario/detallecompra";//pdf
+	}
 }
