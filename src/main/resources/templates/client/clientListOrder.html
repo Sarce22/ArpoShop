@@ -28,7 +28,7 @@
 		            <table class="table">
 		              <thead>
 		                <tr>
-		                  <th scope="col">No. de Orden</th>
+		                  <th scope="col">N° de Orden</th>
 		                  <th scope="col">Fecha</th>
 		                  <th scope="col">Estado</th>
 		                  <th scope="col">Valor</th>
@@ -41,8 +41,11 @@
 		                  <td th:text="${order.dateOrder}" ></td>
 		                  <td th:text="${order.status}"></td> 
 		                  <td th:text="${order.total}" ></td>
-		                  <td>Ver detalle</td>
-		                  <!-- <a th:href="@{/usuario/detalle/{id} (id=${order.idOrder}) }" class="btn btn-success">Ver Detalle</a> -->
+		                  <td><a th:href="@{export/pdf/{id} (id=${order.idOrder}) }" class="btn btn-primary">
+							  <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/950/950258.png" 
+									style='width: 25px'></img>
+							  Imprimir</a></td>
+		   
 		                </tr>
 		              </tbody>
 		            </table>
