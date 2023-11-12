@@ -16,6 +16,7 @@ import com.arpo.models.Rol;
 import com.arpo.models.User;
 import com.arpo.service.RolService;
 import com.arpo.service.UserService;
+import com.arpo.singleton.Singleton;
 
 @Controller
 @RequestMapping("/user")
@@ -26,6 +27,9 @@ public class UserController {
 	 
 	 @Autowired
 	 private RolService rolService;
+	 
+	 @Autowired 
+	 private Singleton singleton;
 	    
 	 @GetMapping("/registro")
 	    public String mostrarFormularioRegistro(Model model) {
@@ -55,6 +59,8 @@ public class UserController {
 	            Rol rolSeleccionado = rolService.getRolById(idRol);
 	            usuario.setIdRol(rolSeleccionado);
 	            userService.save(usuario);
+	            singleton.getListUser().add(usuario);
+	            singleton.escribirObjetoListUser();
 	            return "redirect:/user/listado-usuarios";
 	        }
 	        

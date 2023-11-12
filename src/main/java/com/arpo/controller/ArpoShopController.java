@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +19,8 @@ import com.arpo.models.Rol;
 import com.arpo.models.User;
 import com.arpo.service.CategoryProductService;
 import com.arpo.service.ProductService;
+import com.arpo.service.RolService;
+import com.arpo.service.UserService;
 import com.arpo.singleton.Singleton;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,6 +37,12 @@ public class ArpoShopController {
 	@Autowired
 	private CategoryProductService categoryService;
 	
+	@Autowired
+	private UserService userService;
+	
+	 @Autowired
+	 private RolService rolService;
+	
 	
 	@GetMapping({"/"})
 	public String ShowLogin() {
@@ -39,7 +50,8 @@ public class ArpoShopController {
 	}
 	
 	@GetMapping({"/signIn"})
-	public String signIn() {
+	public String signIn(Model model) {
+		model.addAttribute("user", new User());
 		return "signIn";
 	}
 	
@@ -73,11 +85,35 @@ public class ArpoShopController {
             }
         }
         model.addAttribute("errorMessage", "Credenciales incorrectas. Intente nuevamente.");
-        return "login"; // Página de error o login nuevamente
+        return "login"; 
     }
 
 
 
+    @PostMapping("/user-registration")
+    private String userRegistration(@ModelAttribute("user") @Validated User user, BindingResult bindingResult, Model model) {
+        boolean usuarioId = userService.alReadyExist(user.getIdUser());
+        boolean emailUsed = userService.isEmailDuplicated(user.getEmail());
+
+        if (usuarioId) {
+            bindingResult.rejectValue("idUser", "error.user", "El ID de usuario ya existe");
+        } else if (emailUsed) {
+            bindingResult.rejectValue("email", "error.user", "Ya existe una cuenta con ese email.");
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("user", user);
+            return "signIn";
+        } else {
+            int idRol = 1;
+            Rol rolSeleccionado = rolService.getRolById(idRol);
+            user.setIdRol(rolSeleccionado);
+            userService.save(user);
+            userSingleton.getListUser().add(user);
+            userSingleton.escribirObjetoListUser();
+            return "redirect:/";
+        }
+    }
 
 
 

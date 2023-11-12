@@ -40,42 +40,45 @@
 				<div class="card">
 					<div class="card-body">
 						<h1 class="card-title text-center">Registro de Usuario</h1> <br>
-						<form>
+						
+						<form th:action="@{/user-registration}" th:object="${user}" method="post" >
+							<div th:if="${#fields.hasErrors('idUser')}" class="alert alert-danger" role="alert">
+							    <span th:errors="*{idUser}"></span>
+							</div>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="mb-3">
-										<input type="text" class="form-control" id="name" name="name"
-											placeholder="Nombre" required>
+										<input type="text" th:field="*{name}" class="form-control" id="name" required="required" placeholder="Nombre">
 									</div>
 									<div class="mb-3">
-										<input type="text" class="form-control" id="surname" name="surname"
-											placeholder="Apellido" required>
+										<input type="text" th:field="*{surname}" class="form-control" id="surname" required="required" placeholder="Apellido">
 									</div>
 									<div class="mb-3">
-										<input type="number" class="form-control" id="age" name="age" placeholder="Edad"
-											required>
+										<input type="number" th:field="*{age}" class="form-control" id="age" required="required" min="1" max="100" placeholder="Edad">
 									</div>
 									<div class="mb-3">
-										<input type="number" class="form-control" id="id" name="id" placeholder="Cedula"
-											required>
+										<input type="number" th:field="*{idUser}" class="form-control" id="idUser" placeholder="Cedula" required="required">
+										<div class="alert alert-danger" th:if="${errorIdDuplicado}" role="alert" data-dismiss="alert">
+				                            <strong>El ID de usuario ya existe</strong>
+				                        </div>
 									</div>
+									
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<input type="email" class="form-control" id="email" name="email"
-											placeholder="Correo Electrónico" required>
+										<input type="email" th:field="*{email}" class="form-control" id="email" required="required" placeholder="Correo Electrónico">
+										<div class="alert alert-danger" th:if="${errorEmailDuplicado}" role="alert" data-dismiss="alert">
+				                            <strong>Ya existe una cuenta con ese email.</strong>
+				                        </div>
 									</div>
 									<div class="mb-3">
-										<input type="password" class="form-control" id="password" name="password"
-											placeholder="Contraseña" required>
+										<input type="password" th:field="*{password}" class="form-control" id="password" name="password" required="required" placeholder="Contraseña">
 									</div>
 									<div class="mb-3">
-										<input type="text" class="form-control" id="address" name="address"
-											placeholder="Dirección" required>
+										<input type="text" th:field="*{address}" class="form-control" id="address" required="required" placeholder="Dirección">
 									</div>
 									<div class="mb-3">
-										<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
-											placeholder="Número de Teléfono" required>
+										<input type="text" th:field="*{phoneNumber}" class="form-control" id="phoneNumber" required="required" placeholder="Teléfono" minlength="10" maxlength="10">
 									</div>
 								</div>
 							</div>
