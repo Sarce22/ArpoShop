@@ -137,6 +137,22 @@ public class User implements Serializable{
 	public void setIdRol(Rol idRol) {
 		this.idRol = idRol;
 	}
+
+	public List<Product> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Product> productos) {
+		this.productos = productos;
+	}
+
+	public List<Order> getOrdenes() {
+		return ordenes;
+	}
+
+	public void setOrdenes(List<Order> ordenes) {
+		this.ordenes = ordenes;
+	}
 	
 
 }
