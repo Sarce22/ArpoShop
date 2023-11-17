@@ -40,41 +40,41 @@
 				<div class="card">
 					<div class="card-body">
 						<h1 class="card-title text-center">Registro de Usuario</h1> <br>
-						<form>
+						<form th:action="@{/user/newUsuarios}" th:object="${usuario}" method="post">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="mb-3">
-										<input type="text" class="form-control" id="name" name="name"
+										<input type="text" th:field="*{name}" class="form-control" id="name" name="name"
 											placeholder="Nombre" required>
 									</div>
 									<div class="mb-3">
-										<input type="text" class="form-control" id="surname" name="surname"
+										<input type="text" th:field="*{surname}" class="form-control" id="surname" name="surname"
 											placeholder="Apellido" required>
 									</div>
 									<div class="mb-3">
-										<input type="number" class="form-control" id="age" name="age" placeholder="Edad"
+										<input type="number" th:field="*{age}" class="form-control" id="age" name="age" placeholder="Edad"
 											required>
 									</div>
 									<div class="mb-3">
-										<input type="number" class="form-control" id="id" name="id" placeholder="Cedula"
+										<input type="number" th:field="*{idUser}" class="form-control" id="id" name="id" placeholder="Cedula"
 											required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<input type="email" class="form-control" id="email" name="email"
+										<input type="email" th:field="*{email}" class="form-control" id="email" name="email"
 											placeholder="Correo Electrónico" required>
 									</div>
 									<div class="mb-3">
-										<input type="password" class="form-control" id="password" name="password"
+										<input type="password" th:field="*{password}" class="form-control" id="password" name="password"
 											placeholder="Contraseña" required>
 									</div>
 									<div class="mb-3">
-										<input type="text" class="form-control" id="address" name="address"
+										<input type="text" th:field="*{address}" class="form-control" id="address" name="address"
 											placeholder="Dirección" required>
 									</div>
 									<div class="mb-3">
-										<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
+										<input type="tel" th:field="*{phoneNumber}" class="form-control" id="phoneNumber" name="phoneNumber"
 											placeholder="Número de Teléfono" required>
 									</div>
 								</div>
