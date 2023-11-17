@@ -36,10 +36,8 @@ public class InventoryController {
 	@PostMapping("/filtrarProductos")
 	public String filtrarProductos(@RequestParam Long idCategory, Model model) {
 		if (idCategory == null || idCategory <= 0) {
-			// Si no se selecciona una categoría válida, mostrar todos los productos
 			model.addAttribute("ListProducts", productService.listProduct());
 		} else {
-			// Si se selecciona una categoría válida, filtrar los productos por categoría
 			model.addAttribute("ListProducts", productService.getByCategory(idCategory));
 		}
 		List<CategoryProduct> categories = categoryService.listCategory();

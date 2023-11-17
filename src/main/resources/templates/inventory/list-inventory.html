@@ -16,10 +16,10 @@
                 <div class="row">
                     <div class="col">
                         <label for="idCategory">Filtrar por Categoría</label>
-                    <select name="idCategory" class="form-control" id="idCategory" required="required">
-                        <option value="">Seleccionar...</option> <!-- Agrega un valor vacío para mostrar todos los productos -->
-                        <option th:each="inventory : ${inventory}" th:value="${inventory.idCategoryProduct}" th:text="${inventory.nameCategory}"></option>
-                    </select><br>
+	                    <select name="idCategory" class="form-control" id="idCategory" required="required">
+	                        <option value="-1">Seleccionar...</option> 
+	                        <option th:each="inventory : ${inventory}" th:value="${inventory.idCategoryProduct}" th:text="${inventory.nameCategory}"></option>
+	                    </select><br>
                     </div>
 
                     <div class="col"><br>
