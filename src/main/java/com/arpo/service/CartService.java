@@ -1,14 +1,12 @@
 package com.arpo.service;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arpo.models.Cart;
-import com.arpo.models.Product;
 import com.arpo.repository.ICartRepository;
 
 
@@ -22,6 +20,10 @@ public class CartService {
     
     public Cart save(Cart cart) {
     	return cartRepository.save(cart);
+    }
+    
+    public Optional<Cart> findById (Long id) {
+    	return cartRepository.findById(id);
     }
     
 }

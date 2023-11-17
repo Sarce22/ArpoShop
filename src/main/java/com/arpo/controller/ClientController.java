@@ -90,6 +90,9 @@ public class ClientController {
 	    		 model.addAttribute("user", user.get());
 			}
 		}
+	    if(product.getStock() == 0) {
+	    	model.addAttribute("message", "El producto no se encuentra disponible");
+	    }
    		model.addAttribute("product", product);
    		return "client/clientDetailProduct";
    	}
@@ -102,4 +105,6 @@ public class ClientController {
 		model.addAttribute("sesion", session.getAttribute("userId"));
 		return "usuario/detallecompra";
 	}
+	
+	
 }
