@@ -22,6 +22,7 @@
 
                 <div th:each="item : ${cart}" class="card mb-3">
 
+
                     <div class="row no-gutters">
                         <div class="col-md-4 my-4">
                             <img class="card-img" th:src="${item.product.urlImagen}" alt="">
@@ -30,15 +31,16 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${item.nombre}"></h5>
-
                                 <p class="card-text">
                                     Precio: $<span th:text="${item.precio}"></span>
                                 </p>
                                 <p class="card-text">
-                                    Cantidad en stock: <span th:text="${item.cantidad}"></span>
+                                    Cantidad: <span th:text="${item.cantidad}"></span>
                                 </p>
+									
                                 <p class="card-text" th:text="${item.total}"></p>
-                                
+                               
+									
                                 <a th:href="@{/cart/delete/cart/{id}(id=${item.product.idProduct}) }" class="btn btn-danger">
 									<img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/7347/7347206.png" 
 									style='width: 25px'></img>

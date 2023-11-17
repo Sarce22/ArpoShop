@@ -37,13 +37,19 @@
 				    	style="grid-template-columns: repeat(3, 1fr); row-grap:15px;">
 						<div class="card mx-4" style="width:350px; "  th:each="product : ${products}">
 							<div class="card-img" style="width:330;">
-								<img  class="card-img-top m-1 " th:src="${product.urlImagen}" width="320px" height="auto">
+								<a th:href="@{/product/detalleproducto/{idProduct}(idProduct=${product.idProduct})}">
+									<img  class="card-img-top m-1 " th:src="${product.urlImagen}" width="320px" height="auto">
+								</a>
 							</div>
 
 						  <div class="card-body">
 						    <h4 class="card-title" th:text="${product.nameProduct}"></h4>
 						    <span><b>Proveedor: </b><span th:text="${product.idSupplier.nameSupplier}"></span></span><br>
 						    <b><span th:text="${product.price}" style="color: crimson;"></span></b> <br>
+							
+							<a th:href="@{/product/detalleproducto/{idProduct}(idProduct=${product.idProduct})}">
+								<img class="card-img-top mx-5 " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn6O3SGIX-byH--yDbt5Pi0q4MmqeeDT_xuWJws9S0SIIEGl0MgQxENYjeVgkS1ptfYw&usqp=CAU" style='width: 130px'>
+							</a>
 						</div>
 					</div>
                     
@@ -53,7 +59,7 @@
 
     </section><br><br><br><br><br><br>
 
-    <div th:replace="components/footer :: footer"></div>
+    <div th:replace="~{components/footer :: footer}"></div>
 </body>
 
 </html>

@@ -47,17 +47,20 @@ public class CartController {
 	     Optional<Product> optionalProducto = productService.get(id);
 	     Product product = optionalProducto.orElse(null);
 
-	     if (cantidad <= 0 || cantidad > product.getStock()) {
+	     if (cantidad > product.getStock()) {
 	         model.addAttribute("error", "Error: Cantidad no válida.");
 	         
 	         return "/error";
 	     }
-
-	     
+	     if(product.getStock() == 0) {
+	    	 model.addAttribute("error", "Error: Que el producto no está disponible ");
+	         
+	         return "/error";
+	     }
 	     Cart cart = new Cart();
 	     double sumaTotal = 0;
-
-	     
+	     Long idCa = (long) 100;
+	     cart.setIdcart(idCa);
 	     cart.setCantidad(cantidad);
 	     cart.setPrecio(product.getPrice());
 	     cart.setNombre(product.getNameProduct());
@@ -70,15 +73,13 @@ public class CartController {
 	     if (!ingresado) {
 	         detalles.add(cart);
 	     }
-
+	     idCa++;
 	     sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
 
 	     order.setTotal(sumaTotal);
 
-	     
 	     model.addAttribute("cart", detalles);
 	     model.addAttribute("order", order);
-
 	     
 	     return "cart/view-cart";
 	 }
@@ -116,7 +117,6 @@ public class CartController {
 			model.addAttribute("cart", detalles);
 			model.addAttribute("orden", order);
 			
-			
 			model.addAttribute("sesion", session.getAttribute("userId"));
 			return "/cart/view-cart";
 		}
@@ -146,7 +146,18 @@ public class CartController {
 			order.setUser(usuario);
 			order.setStatus("Procesado");
 			orderService.save(order);
+			int cantidad = 0;
+			List<Product> products = productService.listProduct();
 			
+			for (int i = 0; i < products.size(); i++) {
+				for (int j = 0; j < detalles.size(); j++) {
+					if(products.get(i).getIdProduct() == detalles.get(j).getProduct().getIdProduct()) {
+						cantidad = products.get(i).getStock() - detalles.get(j).getCantidad();
+						System.out.print(cantidad);
+						products.get(i).setStock(cantidad);
+					}
+				}
+			}
 			for (Cart dt:detalles) {
 				dt.setOrder(order);
 				cartService.save(dt);
@@ -157,5 +168,5 @@ public class CartController {
 			
 			return "redirect:/order/showOrders";
 		}
-	 
+		
 }

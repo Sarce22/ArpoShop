@@ -78,7 +78,7 @@ public class ArpoShopController {
     	    }
     	    session.setAttribute("userId", user.get().getIdUser());
     	    model.addAttribute("categories", categories);
-            if (userRole.getName_rol().equals("Administrador")) {
+            if (userRole.getName_rol().equals("Administrador")|| userRole.getName_rol().equals("Empleado")) {
                 return "exploreProducts"; 
             } else if (userRole.getName_rol().equals("Cliente")) {
             	return "client/clientTemplate"; 
