@@ -91,19 +91,16 @@ public class ArpoShopController {
 
 
     @PostMapping("/user-registration")
-    private String userRegistration(@ModelAttribute("user") @Validated User user, BindingResult bindingResult, Model model) {
+    private String userRegistration(@ModelAttribute("user") @Validated User user, Model model) {
         boolean usuarioId = userService.alReadyExist(user.getIdUser());
         boolean emailUsed = userService.isEmailDuplicated(user.getEmail());
 
         if (usuarioId) {
-            bindingResult.rejectValue("idUser", "error.user", "El ID de usuario ya existe");
+            model.addAttribute("error", "El ID de usuario ya existe");
+            return "/error";
         } else if (emailUsed) {
-            bindingResult.rejectValue("email", "error.user", "Ya existe una cuenta con ese email.");
-        }
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("user", user);
-            return "signIn";
+        	model.addAttribute("error", "Ya existe una cuenta asociada con ese email.");
+        	return "/error";
         } else {
             int idRol = 1;
             Rol rolSeleccionado = rolService.getRolById(idRol);

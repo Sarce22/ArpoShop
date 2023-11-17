@@ -81,7 +81,7 @@ public class ProductController {
 	        Supplier supplier = supplierService.getById(idSupplier);
 	        product.setIdSupplier(supplier);
 
-	        // Guarda el producto
+	        
 	        productService.saveProduct(product);
 	        
 	        System.out.println("Si GUARDO EL PRODUCTO Y LA IMAGEN");

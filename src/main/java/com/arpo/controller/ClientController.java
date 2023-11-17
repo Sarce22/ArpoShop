@@ -99,8 +99,7 @@ public class ClientController {
 		Optional<Order> orden=orderService.findById(id);
 		
 		model.addAttribute("detalles", orden.get().getDetalle());
-		//session
 		model.addAttribute("sesion", session.getAttribute("userId"));
-		return "usuario/detallecompra";//pdf
+		return "usuario/detallecompra";
 	}
 }

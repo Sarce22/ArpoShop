@@ -42,38 +42,47 @@ public class CartController {
 	 Order order = new Order();
 		
 		
-		@PostMapping("/agregar-producto/{id}")
-		public String addCart(@PathVariable Long id, @RequestParam Integer cantidad, Model model) {
-			Cart cart = new Cart();
-			Product product = new Product();
-			double sumaTotal = 0;
+	 @PostMapping("/agregar-producto/{id}")
+	 public String addCart(@PathVariable Long id, @RequestParam Integer cantidad, Model model) {
+	     Optional<Product> optionalProducto = productService.get(id);
+	     Product product = optionalProducto.orElse(null);
 
-			Optional<Product> optionalProducto = productService.get(id);
-			
-			product = optionalProducto.get();
+	     if (cantidad <= 0 || cantidad > product.getStock()) {
+	         model.addAttribute("error", "Error: Cantidad no válida.");
+	         
+	         return "/error";
+	     }
 
-			cart.setCantidad(cantidad);
-			cart.setPrecio(product.getPrice());
-			cart.setNombre(product.getNameProduct());
-			cart.setTotal(product.getPrice() * cantidad);
-			cart.setProduct(product);
-			
-			//validar que le producto no se añada 2 veces
-			Long idProducto = product.getIdProduct();
-			boolean ingresado=detalles.stream().anyMatch(p -> p.getProduct().getIdProduct()==idProducto);
-			
-			if (!ingresado) {
-				detalles.add(cart);
-			}
-			
-			sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+	     
+	     Cart cart = new Cart();
+	     double sumaTotal = 0;
 
-			order.setTotal(sumaTotal);
-			model.addAttribute("cart", detalles);
-			model.addAttribute("order", order);
+	     
+	     cart.setCantidad(cantidad);
+	     cart.setPrecio(product.getPrice());
+	     cart.setNombre(product.getNameProduct());
+	     cart.setTotal(product.getPrice() * cantidad);
+	     cart.setProduct(product);
 
-			return "cart/view-cart";
-		}
+	     Long idProducto = product.getIdProduct();
+	     boolean ingresado = detalles.stream().anyMatch(p -> p.getProduct().getIdProduct() == idProducto);
+
+	     if (!ingresado) {
+	         detalles.add(cart);
+	     }
+
+	     sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+
+	     order.setTotal(sumaTotal);
+
+	     
+	     model.addAttribute("cart", detalles);
+	     model.addAttribute("order", order);
+
+	     
+	     return "cart/view-cart";
+	 }
+
 
 		
 		@GetMapping("/delete/cart/{id}")
@@ -127,27 +136,22 @@ public class CartController {
 		}
 		
 		
-		
-		// guardar la orden
 		@GetMapping("/saveOrder")
 		public String saveOrder(HttpSession session ) {
 			Date fechaCreacion = new Date();
 			order.setDateOrder(fechaCreacion);
 			
-			//usuario
 			User usuario =userService.findById( Long.parseLong(session.getAttribute("userId").toString())).get();
 			
 			order.setUser(usuario);
 			order.setStatus("Procesado");
 			orderService.save(order);
 			
-			//guardar detalles
 			for (Cart dt:detalles) {
 				dt.setOrder(order);
 				cartService.save(dt);
 			}
 			
-			///limpiar lista y orden
 			order = new Order();
 			detalles.clear();
 			

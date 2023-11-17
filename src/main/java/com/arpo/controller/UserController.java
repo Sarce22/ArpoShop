@@ -84,11 +84,8 @@ public class UserController {
 	            return "usuario/update-user";
 	    	}
 
-	        // Busca el usuario existente por su id en la base de datos
-
 	    	User alreadyExist = userService.getById(id);
 	        if (alreadyExist != null) {
-	            // Actualiza los datos del usuario existente con los datos del formulario
 	        	alreadyExist.setName(user.getName());
 	        	alreadyExist.setSurname(user.getSurname());
 	        	alreadyExist.setAddress(user.getAddress());

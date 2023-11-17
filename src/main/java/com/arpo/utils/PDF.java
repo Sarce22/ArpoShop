@@ -47,8 +47,6 @@ public class PDF {
         return font;
     }
 
- // ... (código previo)
-
     private void addTitle(Document document) throws DocumentException {
         Font titleFont = getTitleFont();
         
@@ -81,14 +79,14 @@ public class PDF {
 
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100f);
-        table.setSpacingBefore(10f); // Espacio antes de la tabla
-        table.setSpacingAfter(10f);  // Espacio después de la tabla
+        table.setSpacingBefore(10f); 
+        table.setSpacingAfter(10f);  
 
-        // Definir ancho de las columnas
+        
         float[] columnWidths = {4f, 2f, 2f, 2f};
         table.setWidths(columnWidths);
 
-        // Encabezado de la tabla
+        
         PdfPCell cell = new PdfPCell(new Phrase("Producto", subtitleFont));
         cell.setBackgroundColor(new Color(200, 220, 255)); // Color de fondo
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -103,7 +101,7 @@ public class PDF {
         cell.setPhrase(new Phrase("Total", subtitleFont));
         table.addCell(cell);
 
-        // Contenido de la tabla
+        
         for (Cart item : order.getDetalle()) {
             table.addCell(new Phrase(item.getNombre(), normalFont));
             table.addCell(new Phrase(String.valueOf(item.getPrecio()), normalFont));
